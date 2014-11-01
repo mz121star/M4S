@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="../../lib/jquery/jquery-1.8.2.min.js"></script>
+    <script src="../../lib/ichart.1.2.src.js"></script>
+    <script src="../../lib/Uri.js"></script>
+</head>
+<body>
+<div id='canvasDiv2'></div>
+<script>
+
+    (function (window, $) {
+        var screenWidth, data, uri;
+        uri = new Uri(document.URL)
+        var search = uri.query().replace("?", "");
+
+
+        $(window).resize(function () {
+            Draw(data);
+        });
+
+
+        var Draw = function (d) {
+            data = d;
+
+            new iChart.Bar2D({
+                render: 'canvasDiv2',
+                data: d,
+//                    title: '产品活动关键字',
+                width: document.body.clientWidth,
+                height: 300,
+                border: false,
+                animation: true,
+                animation_duration: 700,//700ms完成动画
+                offsetx: 26,
+                footnote: {
+                    text: 'Power by Reunion',
+                    color: '#909090',
+                    fontsize: 11,
+                    padding: '0 38'
+                },
+                label: {
+                    fontsize: 11,
+                    color: '#666666',
+                    paddingleft: '0',
+                    textAlign: 'left',
+                    textBaseline: 'middle',
+                    rotate: 20,
+                    font: '微软雅黑'
+                },
+                coordinate: {
+                    scale: [
+                        {
+                            position: 'bottom',
+                            listeners: {
+                                parseText: function (t, x, y) {
+                                    return {text: t}
+                                }
+                            },
+                            label: {color: '#254d70', fontsize: 11, fontweight: 600}
+                        }
+                    ]
+                }
+            }).draw();
+        }
+        $.post('/api/TopicKeywordReportPost', search).success(function (d) {
+            //搜索来源饼图
+            Draw(d);
+        })
+
+    })(window, jQuery)
+</script>
+</body>
+</html>

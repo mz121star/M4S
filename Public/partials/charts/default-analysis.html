@@ -1,0 +1,4 @@
+<pr-box ng-repeat="dashboard in myDashBoards" box-class="dashboard.Size" box-title="dashboard.Title"  >
+    <iframe ng-src="widgets/{{dashboard.Name}}/index.html{{searchDataForChart}}" border=0 width="100%"
+            frameborder=no scrolling="no" height={{dashboard.Height||300}}></iframe>
+</pr-box>

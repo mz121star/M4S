@@ -1,0 +1,32 @@
+
+<div class="alert alert-info" ng-show="!!!myDashBoards">
+  <i class="fa fa-exclamation-triangle"></i>   <strong>No Charts! </strong>You can choose to add the statements from the left menu.
+</div>
+<div class=" "  ng-show="!!myDashBoards">
+        <span class="col-md-3">
+            <select class="form-control " ng-model="dataRange">
+                <option value="7" selected="selected">Last 7 Days</option>
+                <option value="30">Last month</option>
+            </select>
+          <!--  {{searchDate.starttime}}-->
+        </span>
+
+    <span class="item"><input bs-datepicker ng-model="dashboard.startDate" class=" form-control col-md-3 inputdate"
+                              type="text"></span>
+
+    <span class="item"><input bs-datepicker ng-model="dashboard.endDate" class="form-control col-md-3  inputdate"
+                              type="text"></span>
+    <span class="item"><button class="btn btn-primary" ng-click="search()">Search</button></span>
+
+
+    <div class="row">
+        <pr-box ng-repeat="dashboard in myDashBoards" box-class="dashboard.Size" box-title="dashboard.Title"
+                on-Closed="remove(dashboard._id)">
+            <iframe ng-src="widgets/{{dashboard.Name}}/index.html{{searchDataForChart}}" border=0 width="100%"
+                    frameborder=no scrolling="no" height={{dashboard.Height||300}}></iframe>
+        </pr-box>
+
+
+    </div>
+
+</div>

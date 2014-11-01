@@ -1,0 +1,13 @@
+ .table tbody tr.subrow {padding:0;display: none;}
+ .table tbody tr.subrow:hover {background:#FFF;}
+ .table tbody tr.subrow .subrowtd {padding:0;border-right:none;}
+
+ .table .subtable {width:100%;margin:0;padding:0;background:#EEE;}
+ .table .subtable .thead {margin:0;padding:0;background:#DDD;}
+ .table .subtable .thead:hover {background:#DDD;}
+ .table .subtable .thead td {border-bottom:1px solid #b8c0c7;font-weight:bold;color:#001931;}
+ .table .subtable .tbody {margin:0;padding:0;}
+ .table .subtable .tbody:hover {background:none;}
+ .table .subtable .tbody td {border-bottom:1px dashed  #DDD;}
+ /**修复多层表格**/
+ tbody tr span[class='ng-scope']{display: none}

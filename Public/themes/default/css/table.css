@@ -1,0 +1,38 @@
+
+
+
+.table tr th {
+    background: none repeat scroll 0 0 #EEEEEE;
+    vertical-align: middle;
+}
+
+.table tr th, .table tr td {
+    border-top: 1px dotted #DDDDDD;
+    padding: 10px;
+}
+
+.table tr td {
+    word-wrap: normal;
+    word-break: break-all;
+    table-layout: fixed;
+    border-left: 1px solid #DDDDDD
+}
+
+.keep-all th {
+    word-break: keep-all;
+    white-space: nowrap;
+}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    vertical-align: middle;
+}
+
+.pagination {
+    border-radius: 4px;
+    display: inline-block;
+    margin: 20px 0 15px 360px;
+    padding-left: 0;
+}
+.text-white:hover{
+    color: #ffffff;
+}

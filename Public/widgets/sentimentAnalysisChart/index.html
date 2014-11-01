@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="../../lib/jquery/jquery-1.8.2.min.js"></script>
+    <script src="../../lib/ichart.1.2.src.js"></script>
+    <script src="../../lib/Uri.js"></script>
+</head>
+<body>
+<div id='canvasDiv3'></div>
+<script>
+
+    (function (window, $) {
+        var screenWidth, data, uri;
+        uri = new Uri(document.URL)
+        var search = uri.query().replace("?", "");
+
+
+        $(window).resize(function () {
+            Draw(data);
+        });
+
+
+        var Draw = function (d) {
+            data = d;
+
+            new iChart.ColumnMulti2D({
+                render: 'canvasDiv3',
+                data: d.data,
+                labels: d.labels,
+                offsetx: 14,
+                footnote: ' ',
+                width: 450,
+                height: 300,
+                border: false,
+                animation: true,
+                animation_duration: 700,//700ms完成动画
+                background_color: '#ffffff',
+                legend: {
+                    enable: true,
+                    background_color: null,
+                    border: {
+                        enable: false
+                    }
+                },
+
+                coordinate: {
+                    background_color: '#f1f1f1',
+                    rotate: 20,
+                    scale: [
+                        {
+                            position: 'left',
+                            start_scale: 0,
+                            end_scale: 140,
+                            rotate: 20,
+                            scale_space: 300
+                        }
+                    ],
+                    width: 400,
+                    height: 300
+                }
+            }).draw();
+        }
+        $.post('/api/SentimentAnalysisByFromTypeBarPost', search).success(function (d) {
+            //搜索来源饼图
+            Draw(d);
+        })
+
+    })(window, jQuery)
+</script>
+</body>
+</html>

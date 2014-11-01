@@ -1,0 +1,220 @@
+.titbg {
+    background: none repeat scroll 0 0 #EEEEEE;
+    padding: 0 0 0 10px;
+}
+
+.censt {
+    text-align: center !important;
+    margin: 15px 0;
+}
+
+.table {
+    border: 1px solid #DDDDDD !important;
+}
+
+.s-title-bg-blue {
+    height: 29px;
+    color: #fff;
+    text-indent: 20px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+    background: none repeat scroll 0 0 #007DC8 !important;
+}
+
+.s-title-bg-red {
+    height: 29px;
+    color: #fff;
+    text-indent: 20px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+    background: none repeat scroll 0 0 #e00031 !important;
+}
+
+.s-pk-mod {
+    background: none repeat scroll 0 0 transparent;
+    /*border: 1px solid #EEEEEE;*/
+    margin-bottom: 10px;
+    position: relative;
+    width: 398px;
+}
+
+.pk-title-blue {
+    border: 2px solid #007dc8 !important;
+}
+
+.pk-title-red {
+    border: 2px solid #e00031 !important;
+}
+
+h5 {
+    font-size: 14px !important;;
+    line-height: 30px !important;;
+}
+
+.input_style {
+    width: 130px;
+    float: left;
+}
+
+.input_style label {
+    display: inline-block;
+}
+
+.search_all {
+    border: 1px solid #eeeeee;
+    width: 99%;
+    float: left;
+    margin: 0 auto;
+}
+
+.search_list {
+    border-bottom: 1px solid #eeeeee;
+    margin: 0 auto;
+}
+
+.search_list .title {
+    width: 13%;
+    padding: 5px 0 5px 5px;
+    float: left;
+}
+
+.search_list .search_content {
+    width: 85%;
+    float: left;
+    padding: 5px 0;
+}
+
+.reunioncontent .content {
+    width: 99%;
+    float: left;
+    margin: 15px 0 0 0 !important;
+    overflow-y: auto;
+!important
+}
+
+.pic-bdle {
+    float: left;
+    width: 48.3%;
+    margin-right: 15px;
+    min-height: 400px;
+}
+
+.pull-left {
+    /*margin: 0 0 0 15px !important;*/
+}
+
+.navigation {
+    background: #eeeeee;
+    float: left;
+    width: 16%;
+    margin-top: 10px;
+}
+
+.navr li {
+    line-height: 35px;
+    font-size: 15px;
+    text-indent: 20px;
+    font-weight: bold;
+}
+
+.navr li ul.second {
+    background: #f5f5f5;
+}
+
+.navr li ul.second li {
+    list-style: none;
+    line-height: 30px;
+    text-indent: 20px;
+    font-weight: normal;
+}
+
+.navr li ul.second li a, .navr li ul.second li a:hover {
+    font-size: 12px;
+    text-indent: 20px;
+    padding-left: 20px;
+    color: #444444;
+}
+
+.current {
+    background: #cccccc;
+    color: #ffffff;
+}
+
+#top_nav .logo a {
+    background: url("../img/reunion-logo-top.png") no-repeat scroll 0 0 transparent !important;
+    width: 90px !important;
+    height: 31px !important;
+    margin: 2px 118px 5px 20px;
+}
+
+.wrap_top_nav {
+    background: url("../img/top.png") repeat-y scroll 0 0 transparent !important;
+    height: 40px;
+    position: relative;
+}
+
+#top_nav ul li {
+    margin: 0 30px 0 0;
+}
+
+#top_nav ul {
+    width: 80%;
+}
+
+.mr20 {
+    margin: 0 20px 0 0;
+}
+
+#top_nav .right_nav {
+    color: #FFFFFF;
+    float: right;
+    margin-top: -41px;
+    width: 230px;
+}
+
+.search-pic {
+    background: url("../img/search.png") no-repeat scroll 0 0 transparent !important;
+    height: 24px;
+    left: 194px;
+    top: 53px;
+    position: absolute;
+    width: 24px;
+}
+
+.footer {
+    background-color: #003a83;
+    clear: both;
+    height: 30px;
+}
+
+.tap-nav-pic {
+    background-color: #FF0000;
+    border: 1px solid red;
+    border-radius: 8px 8px 8px 8px;
+    color: #FFFFFF;
+    height: 11px;
+    line-height: 11px;
+    margin-left: -24px;
+    margin-top: 6px;
+    position: absolute;
+    width: 11px;
+}
+
+.footer-logo {
+    background: url("../img/pactera-logo-footer.png") no-repeat scroll 0 0 transparent !important;
+    height: 31px !important;
+    float: right;
+    width: 90px !important;
+    margin: 0 20px 0 0;;
+}
+.footer-message{
+    color: #FFFFFF;
+    float: right;
+    margin: 6px 10px 0;
+}

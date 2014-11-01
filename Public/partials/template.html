@@ -1,0 +1,220 @@
+<article  xmlns="http://www.w3.org/1999/html">
+    <div class="row-fluid form-horizontal">
+        <div class="span6 ">
+            <div class="control-group">
+                <label class="control-label" >模板名称</label>
+                <div class="controls">
+                    <input type="text"  ng-model="search.name" class="m-wrap span6" />
+                </div>
+            </div>
+        </div>
+        <div class="span6 ">
+            <div class="control-group">
+                <label class="control-label" >模板类型</label>
+                <div class="controls">
+                    <select  class="m-wrap span6"tabindex="1" ng-model="search.type"  tabindex="1">
+                        <option value="">请选择</option>
+                        <option value="0">注册模板</option>
+                        <option value="1">出行贴士模板</option>
+                        <option value="2">车健康提示模板</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+            <div class="span12 responsive" data-tablet="span12 fix-offset" data-desktop="span12">
+                <div class="portlet-title searchbutton">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="btn yellow"  ng-click=query()>
+                        <i class="icon-eye-open"></i>
+                        查询
+                    </button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="btn blue" ng-click="reset()">
+                        <i class="icon-undo"></i>
+                        重置
+                    </button>
+                </div>
+            </div>
+        <div class="portlet-body">
+        &nbsp;
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12 responsive" data-tablet="span12 fix-offset" data-desktop="span12">
+            <div class="portlet box grey">
+                <div class="portlet-title">
+                    <div class="caption"><i class="icon-user"></i>模板管理</div>
+                    <div class="actions">
+                        <a href="#" class="btn blue" data-toggle="modal" data-target="#example"  ng-click="add()"><i class="icon-pencil"></i>新增</a>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <table datatable id="sample-table-2" class="table bottom table-striped table-bordered table-hover dataTable">
+                        <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th>是否有效</th>
+                            <th>所属4S店</th>
+                            <th>模板类型</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat='template in TemplateList.list'>
+                            <td>{{template.name}}</td>
+                            <td>{{template.status|statust:status}}</td>
+                            <td>{{template.companyName}}</td>
+                            <td>{{template.category|categoryname:category}}</td>
+                            <td>
+                                <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                    <span class="btn mini yellow" ng-Model="template" title="修改" ng-click=edit(template) data-toggle="modal" data-target="#example">
+                                        <i class="icon-edit bigger-120"></i>
+                                        修改
+                                    </span>
+                                    &nbsp;&nbsp;
+                                     <span class="btn mini red" ng-Model="template" title="删除" ng-click=delete(template)>
+                                        <i class="icon-trash bigger-120"></i>
+                                        删除
+                                    </span>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="row-fluid top">
+                        <div class="span12 responsive paginationtop">
+                            <div class="dataTables_paginate  paging_bootstrap pagination">
+                                <ul>
+                                    <li class="prev">
+                                        <a href="javascript:;" ng-click="PagerPrev()">← <span class="hidden-480">前一页</span></a>
+                                    </li>
+                                    <li   ng-class="{active : $index==TemplateList.pagenum-1}"   ng-repeat="n in []|PagerRange:TemplateList.pagecount">
+                                      <!--  <a href="#">{{TemplateList.pagecount}}</a>-->
+                                        <a href="javascript:;" ng-click="PagerData(n+1)">{{n+1}}</a>
+                                    </li>
+
+                                    <li class="next">
+                                        <a href="javascript:;" ng-click="PagerAfter()"><span class="hidden-480">后一页</span> → </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+
+<div id="example" class="modal fade" tabindex="-1">
+    <div class="row-fluid">
+        <div class="span12 responsive" data-tablet="span12 fix-offset" data-desktop="span12">
+            <div class="portlet box blue">
+                <div class="portlet-title ">
+                    <div class="caption"><i class="icon-user"></i>新增/修改模板</div>
+                    <div class="actions">
+                        <a href="#" class="close red" data-dismiss="modal" aria-hidden="true"></a>
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <form class="form-horizontal roledialog" name="templateForm" action="#">
+                       <input type="hidden"  ng-model="template.id" style="width:92%;">
+                        <div class="row-fluid">
+                            <div class="span6 ">
+                                <div ng-class="{'control-group error': templateForm.name.$invalid,'control-group': templateForm.name.$valid}">
+                                    <label class="control-label">名称</label>
+                                    <div class="controls">
+                                        <input type="text" name="name" required="true"  ng-required="true" ng-model="template.name" class="m-wrap span6" />
+                                        <span class="help-block" ng-show="templateForm.name.$invalid">名称是必填项！</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span6 ">
+                                <div ng-class="{'control-group error': templateForm.type.$invalid,'control-group': templateForm.type.$valid}">
+                                    <label class="control-label">模板类型</label>
+                                    <div class="controls">
+                                        <select id="company" name="type" class="m-wrap span6"tabindex="1" ng-required="true" ng-model="template.type"  tabindex="1">
+                                            <option value="0">注册模板</option>
+                                            <option value="1">出行贴士模板</option>
+                                            <option value="2">车健康提示模板</option>
+                                        </select>
+                                        <span class="help-block" ng-show="templateForm.type.$invalid">模板类型是必填项！</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span6 ">
+                                <div ng-class="{'control-group error': templateForm.brand.$invalid,'control-group': templateForm.brand.$valid}">
+                                    <label class="control-label" >所属集团</label>
+                                    <div class="controls" >
+                                        <select id="group" class="m-wrap span6" name="brand" ng-model="template.brand"  ng-options='m.id as m.name for m in groupslist' tabindex="1">
+                                            <option value="">-- 请选择 --</option>
+                                        </select>
+                                        <span class="help-block" ng-show="templateForm.brand.$invalid">所属集团是必填项！</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span6 ">
+                                <div ng-class="{'control-group error': templateForm.company.$invalid,'control-group': templateForm.company.$valid}">
+                                    <label class="control-label" >所属4S店</label>
+                                    <div class="controls">
+                                        <select class="m-wrap span6" name="company" ng-model="template.company"  ng-options='m.id as m.name for m in companylist'  tabindex="1">
+                                            <option value="">-- 请选择 --</option>
+                                        </select>
+                                        <span class="help-block" ng-show="templateForm.company.$invalid">所属4S店是必填项！</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span12 ">
+                                <div ng-class="{'control-group error': templateForm.content.$invalid,'control-group': templateForm.content.$valid}">
+                                    <label class="control-label">内容</label>
+                                    <div class="controls">
+                                        <textarea multiple="multiple"  name="content"  ng-required="true" ng-model="template.content" class="m-wrap span12 langlebel" ></textarea>
+                                        <span class="help-block" ng-show="templateForm.content.$invalid">所属4S店是必填项！</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       <div class="row-fluid">
+                           <div class="span6 ">
+                               <div class="control-group">
+                                   <label class="control-label" >状态</label>
+                                   <div class="controls">
+                                       <select class="m-wrap span6" ng-required ng-model="template.status">
+                                           <option value="0">有效</option>
+                                           <option value="1">无效</option>
+                                       </select>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="span6 ">
+                               <div class="control-group">
+                                   <label class="control-label" >备注</label>
+                                   <div class="controls" >
+                                       <input type="text"   ng-model="template.remark" class="m-wrap span6" />
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer no-margin-top" style="text-align: right">
+                <button type="submit" nm-model="template" ng-disabled='templateForm.$invalid'  id="save" ng-click="submit(template)" class="btn btn-sm purple">
+                    <i class="icon-arrow-right"></i>
+                    保存
+                </button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button class="btn btn-sm red" data-dismiss="modal">
+                    <i class="icon-remove"></i>
+                    关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

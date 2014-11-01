@@ -1,0 +1,171 @@
+<article  xmlns="http://www.w3.org/1999/html">
+    <div class="row-fluid">
+            <div class="span12 responsive" data-tablet="span12 fix-offset" data-desktop="span12">
+                <div class="portlet-title searchbutton">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="btn yellow"  ng-click=list()>
+                        <i class="icon-eye-open"></i>
+                        查询
+                    </button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="btn blue">
+                        <i class="icon-undo"></i>
+                        重置
+                    </button>
+                </div>
+            </div>
+        <div class="portlet-body">
+        &nbsp;
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12 responsive" data-tablet="span12 fix-offset" data-desktop="span12">
+            <div class="portlet box grey">
+                <div class="portlet-title">
+                    <div class="caption"><i class="icon-user"></i>模板管理</div>
+                    <div class="actions">
+                        <a href="#" class="btn blue" data-toggle="modal" data-target="#example"  ng-click="add()"><i class="icon-pencil"></i>新增</a>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <table datatable id="sample-table-2" class="table bottom table-striped table-bordered table-hover dataTable">
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>名称</th>
+                            <th>昵称</th>
+                            <th>是否有效</th>
+                            <th>共享黑名单</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat='template in OwnerList.list'>
+                            <td>{{template.line}}</td>
+                            <td>{{template.name}}</td>
+                            <td>{{template.nickname}}</td>
+                            <td>{{template.status|statust:status}}</td>
+                            <td>{{template.isblack|black:isblack}}</td>
+                            <td>
+                                <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                    <span class="btn mini yellow" ng-Model="template" title="修改" ng-click=edit(template) data-toggle="modal" data-target="#cancel">
+                                        <i class="icon-edit bigger-120"></i>
+                                        禁止共享
+                                    </span>
+                                    &nbsp;&nbsp;
+                                     <span class="btn mini red" ng-Model="template" title="删除" data-toggle="modal" data-target="#example" ng-click=edit(template)>
+                                        <i class="icon-trash bigger-120"></i>
+                                        同意共享
+                                    </span>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="row-fluid top">
+                        <div class="span12 responsive paginationtop">
+                            <div class="dataTables_paginate  paging_bootstrap pagination">
+                                <ul>
+                                    <li class="prev">
+                                        <a href="javascript:;" ng-click="PagerPrev()">← <span class="hidden-480">前一页</span></a>
+                                    </li>
+                                    <li   ng-class="{active : $index==OwnerList.pagenum-1}"   ng-repeat="n in []|PagerRange:OwnerList.pagecount">
+                                      <!--  <a href="#">{{TemplateList.pagecount}}</a>-->
+                                        <a href="javascript:;" ng-click="PagerData(n+1)">{{n+1}}</a>
+                                    </li>
+
+                                    <li class="next">
+                                        <a href="javascript:;" ng-click="PagerAfter()"><span class="hidden-480">后一页</span> → </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+
+<div id="example" class="modal fade" tabindex="-1">
+    <div class="row-fluid">
+        <div class="span12 responsive" data-tablet="span12 fix-offset" data-desktop="span12">
+            <div class="portlet box blue">
+                <div class="portlet-title ">
+                    <div class="caption"><i class="icon-user"></i>移除共享黑名单</div>
+                    <div class="actions">
+                        <a href="#" class="close red" data-dismiss="modal" aria-hidden="true"></a>
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <form class="form-horizontal roledialog" action="#">
+                       <input type="hidden"  ng-model="Blacklist.id" style="width:92%;">
+                       <div class="row-fluid">
+                           <div class="span12 ">
+                               <div class="control-group">
+                                   <label class="control-label" >原因</label>
+                                   <div class="controls" >
+                                       <input type="text"  ng-required ng-model="Blacklist.reason" class="m-wrap span12 langlebel" />
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </form>
+                </div>
+            </div>
+            <div class="modal-footer no-margin-top" style="text-align: right">
+                <button type="button" nm-model="Blacklist"  id="cancelblacklist" ng-click="cancel(Blacklist)" class="btn btn-sm purple">
+                    <i class="icon-arrow-right"></i>
+                    保存
+                </button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button class="btn btn-sm red" data-dismiss="modal">
+                    <i class="icon-remove"></i>
+                    关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="cancel" class="modal fade" tabindex="-1">
+    <div class="row-fluid">
+        <div class="span12 responsive" data-tablet="span12 fix-offset" data-desktop="span12">
+            <div class="portlet box blue">
+                <div class="portlet-title ">
+                    <div class="caption"><i class="icon-user"></i>加入共享黑名单</div>
+                    <div class="actions">
+                        <a href="#" class="close red" data-dismiss="modal" aria-hidden="true"></a>
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <form class="form-horizontal roledialog" action="#">
+                        <input type="hidden"  ng-model="Blacklist.id" style="width:92%;">
+                        <div class="row-fluid">
+                            <div class="span12 ">
+                                <div class="control-group">
+                                    <label class="control-label" >原因</label>
+                                    <div class="controls" >
+                                        <input type="text"  ng-required ng-model="Blacklist.reason" class="m-wrap span12 langlebel" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer no-margin-top" style="text-align: right">
+                <button type="button" nm-model="Blacklist"  id="join" ng-click="join(Blacklist)" class="btn btn-sm purple">
+                    <i class="icon-arrow-right"></i>
+                    保存
+                </button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button class="btn btn-sm red" data-dismiss="modal">
+                    <i class="icon-remove"></i>
+                    关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

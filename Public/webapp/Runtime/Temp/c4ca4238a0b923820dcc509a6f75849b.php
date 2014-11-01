@@ -1,0 +1,3 @@
+<?php
+//000000000000a:1:{i:0;a:16:{s:2:"id";s:32:"79c51429ade813f82e5c97e8ffaf7606";s:6:"int_id";s:2:"29";s:11:"create_user";s:2:"54";s:15:"create_datetime";s:10:"1414813714";s:11:"modify_user";s:2:"54";s:15:"modify_datetime";s:10:"1414813714";s:7:"deleted";s:1:"0";s:6:"status";s:1:"0";s:4:"sort";s:1:"0";s:6:"remark";s:0:"";s:4:"name";s:6:"锦州";s:9:"parent_id";s:2:"18";s:5:"level";s:1:"0";s:7:"id_line";s:1:"1";s:11:"parent_guid";s:2:"18";s:6:"isleaf";N;}}
+?>

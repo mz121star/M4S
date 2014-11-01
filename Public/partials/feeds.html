@@ -1,0 +1,156 @@
+<div class="panel">
+    <div ng-show="!!warning" class="alert alert-warning"> {{ warning }}</div>
+   <pr-box box-title="'Feeds Search' ">
+
+        <form class="form-horizontal form-bordered " role="form" novalidate name="searchFeedForm">
+            <div class="form-group">
+                <label class="col-sm-2 control-label" >Keyword:</label>
+
+                <div class="col-sm-10 form-con">
+                    <input type="text" class="form-control col-md-3" required ng-model="feeds.keyword" />
+                    <span class="glyphicon glyphicon-info-sign info"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Source Type:</label>
+
+                <div class="col-sm-10 form-con">
+                    <label class="checkbox-inline" ng-repeat="st in sourcetype">
+                        <input class="checkbox" pr-check type="checkbox" name="sourceType" ng-checked="st.checked"
+                               ng-model="st.checked" value="{{st.type}}"/>{{st.type}}
+
+                    </label>
+                </div>
+            </div>
+            <div class="form-group form-inline">
+                <label class="col-sm-2 control-label">Date Range:</label>
+
+                <div class="col-sm-10 form-con">
+                    <select class="form-control col-md-3">
+                        <option>Last 7 Days</option>
+                        <option>Last month</option>
+                    </select>
+                    <span class="pull-left form-text-middle">TimeFrame:&nbsp;&nbsp;&nbsp;&nbsp;from</span>
+                    <input bs-datepicker class="form-control col-md-3" type="text" ng-model="feeds.startTime"
+                           name="startTime" required="">
+                    <span class="pull-left form-text-middle">to</span>
+                    <input bs-datepicker class="form-control col-md-3" type="text" ng-model="feeds.endTime">
+
+
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"></label>
+
+                <div class="col-sm-10 form-con">
+                    <button class="btn btn-primary" ng-disabled='searchFeedForm.$invalid' ng-click='searchFeed()'>
+                        Search
+                    </button>
+                  <!--      <button title="Topic Not null" class="btn btn-primary" data-toggle="modal" ng-click=""
+                                data-target="#saveTopicModal"
+                                ng-disabled='searchFeedForm.$invalid||!!!keyword'>Save Current Set
+                        </button>-->
+                    <button class="btn btn-primary" ng-disabled="feedContent.length==0"
+                            ng-click="exportExcel('feedTable','feeds')" type="button">Export Feed
+                    </button>
+
+                </div>
+            </div>
+        </form>
+    </pr-box>
+
+
+    <pr-box>
+        <table id="feedTable" class="table table-hover table-nomargin">
+            <thead>
+            <tr>
+                <th>N0.</th>
+                <th sortable ng-click="f='Title'; rev=!rev">Title</th>
+                <th sortable ng-click="f='Content'; rev=!rev">Description</th>
+                <th sortable ng-click="f='FromSite'; rev=!rev">Source</th>
+                <th>Author</th>
+                <th>Url</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="feed in feedContent | orderBy: f : rev" showdetail data-toggle="modal"
+                ng-click="showDetail(feed)" data-target="#myModal">
+                <td>{{ $index+1 }}</td>
+                <td>{{feed.Title| maxlen:20 }}</td>
+                <td>{{feed.Content | maxlen:40 }}</td>
+                <td>{{ feed.FromSite | maxlen:40}}</td>
+                <td>{{ feed.Author | maxlen:40}}</td>
+                <td>{{ feed.FromUrl | maxlen:40}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <ul class="pagination">
+            <li><a href="javascript:;">&laquo;</a></li>
+            <li ng-class="{active : $index==feeds.pageIndex-1}" ng-repeat="n in [] | PagerRange:pages">
+                <a href="javascript:;" ng-click="PagerData(n+1)">{{n+1}}</a>
+            </li>
+            <li><a href="javascript:;">&raquo;</a></li>
+        </ul>
+    </pr-box>
+
+
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">{{modal.title }}</h4>
+            </div>
+            <div class="modal-body">
+                <div>{{modal.title }}</div>
+                <br>来源:{{modal.source}} | 发布时间:{{modal.publishtime}} | 发布者:{{modal.author}} <br><br>
+
+                <div>{{modal.content }}</div>
+                <br>
+
+                <div><a href="{{modal.url}}" target="_blank">{{modal.url }}</a></div>
+                <br>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<div class="modal fade" id="saveTopicModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Are your sure save the topic?</h4>
+            </div>
+            <div class="modal-body">
+
+                <!--  Topic Name: <input type="text" ng-model="topicName" required="不能为空">
+ -->            Topic Name: <input type="text" ng-model="topicName">
+
+                <div ng-show="!!saveTopicWarning" class="alert alert-success"> {{ saveTopicWarning }}</div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" ng-disabled="!!!topicName" class="btn btn-primary" ng-click="saveTopic()">Save
+                    Topic
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+
+</div>

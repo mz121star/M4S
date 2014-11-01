@@ -1,0 +1,588 @@
+/*html {*/
+/*height: 100%;*/
+
+/*}*/
+
+/*body {*/
+/*font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;*/
+/*font-weight: 300;*/
+/*text-align: left;*/
+/*text-decoration: none;*/
+/*overflow: hidden;*/
+/*background: none;*/
+
+/* background-color: #252326;*/
+/*background: url('img/dots.png') center center fixed, url('img/bg.jpg') center center no-repeat fixed;*/
+/*background-size: auto, cover;*/
+/*}*/
+
+/*@font-face {*/
+/*font-family: 'Denk One';*/
+/*font-style: normal;*/
+/*font-weight: 400;*/
+/*src: local('Denk One'), local('DenkOne-Regular'), url(http://themes.googleusercontent.com/static/fonts/denkone/v1/ahLepySZXU_KFQaVZ6XDvPesZW2xOQ-xsNqO47m55DA.woff) format('woff');*/
+/*}*/
+
+/*@font-face {*/
+/*font-family: 'broccolidry';*/
+/*src: url('fonts/broccolidry.eot');*/
+/*src: url('fonts/broccolidry.eot?#iefix') format('embedded-opentype'), url('fonts/broccolidry.svg#broccolidry') format('svg'), url('fonts/broccolidry.woff') format('woff'), url('fonts/broccolidry.ttf') format('truetype');*/
+/*font-weight: normal;*/
+/*font-style: normal;*/
+/*}*/
+
+/* Use the following CSS code if you want to have a class per icon */
+
+/*******************
+LOGIN FORM
+*******************/
+
+/*******************
+HEADER
+*******************/
+
+/*
+图标设置
+*/
+[class^="icon-"] {
+    font-size: 15px;
+}
+
+.login-form .header {
+    padding: 40px 30px 30px 50px;
+}
+
+.login-form .header h1 {
+    font: 300 28px/34px 'Denk One', sans-serif;
+    color: #414848;
+    text-shadow: 1px 1px 0 rgba(256, 256, 256, 1.0);
+    margin-bottom: 10px;
+}
+
+.login-form .header span {
+    font-size: 11px;
+    line-height: 16px;
+    color: #678889;
+    text-shadow: 1px 1px 0 rgba(256, 256, 256, 1.0);
+}
+
+.prv, .nxt {
+    float: left;
+    width: 19px;
+    height: 19px;
+    margin: 0 3px;
+    overflow: hidden;
+    /* text-indent: -2000px;*/
+}
+
+#top_nav .logo a {
+
+    /*background: url(img/spriteme1.png) no-repeat -10px -22px;*/
+    background: url(img/logo.gif) no-repeat;
+    width: 200px;
+
+}
+
+#top_nav ul {
+    width: 1000px;
+}
+
+/*#top_nav li:nth-child(4) a {*/
+
+/*background: url(img/spriteme1.png) no-repeat -10px -78px;*/
+/*width: 48px;*/
+/*text-indent: -2000px;*/
+/*}*/
+
+/*******************
+CONTENT
+*******************/
+
+.login-form .content {
+    padding: 0 10px 25px 30px;
+    float: left;
+}
+
+.login-form .content .input {
+    width: 188px;
+    padding: 15px 25px;
+    font: 400 14px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    color: #9d9e9e;
+    text-shadow: 1px 1px 0 rgba(256, 256, 256, 1.0);
+    background: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.50);
+    margin-left: 20px;
+}
+
+.login-form .content .password {
+    margin-top: 25px;
+
+}
+
+.login-form .content .input:hover {
+    background: #dfe9ec;
+    color: #414848;
+}
+
+.login-form .content .input:focus {
+    background: #dfe9ec;
+    color: #414848;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.icon-user {
+    top: 147px;
+}
+
+.icon-pass {
+    top: 147px;
+}
+
+.input,
+[class^="icon-"],
+.button,
+.register {
+    transition: all 0.5s;
+
+}
+
+input[type="text"]:focus ~ #user-icon,
+input[type="password"]:focus ~ #user-pass {
+    left: -49px;
+}
+
+/*******************
+FOOTER
+*******************/
+
+.login-form .footer {
+    padding: 25px 30px 40px 1px;
+    overflow: auto;
+    /*  float: left;*/
+}
+
+/* Login button */
+.login-form .footer .button {
+    /* float: right;*/
+    padding: 11px 25px;
+    font: 300 18px 'Denk One', sans-serif;
+    color: #fff;
+    text-shadow: 0px 1px 0 rgba(0, 0, 0, 0.25);
+    background: #56c2e1;
+    border: 1px solid #46b3d3;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: inset 0 0 2px rgba(256, 256, 256, 0.75);
+    /* float: left;*/
+
+}
+
+.login-form .footer .button:hover {
+    background: #3f9db8;
+    border: 1px solid rgba(256, 256, 256, 0.75);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.login-form .footer .button:focus {
+    position: relative;
+    bottom: -1px;
+    background: #56c2e1;
+    box-shadow: inset 0 1px 6px rgba(256, 256, 256, 0.75);
+}
+
+/* Register button */
+.login-form .footer .register {
+    display: block;
+    /*float: right;*/
+    padding: 10px;
+    margin-right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font: 300 18px 'Denk One', sans-serif;
+    color: #414848;
+    text-shadow: 0px 1px 0 rgba(256, 256, 256, 0.5);
+}
+
+.login-form .footer .register:hover {
+    color: #3f9db8;
+    text-decoration: none;
+}
+
+.login-form .footer .register:focus {
+    position: relative;
+    bottom: -1px;
+}
+
+article.blogcontent {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 800px;
+    color: white;
+}
+
+.login-form {
+    width: 1000px;
+    margin: 50px auto;
+    position: relative;
+    transition: all 0.5s;
+}
+
+#njblogbg {
+    background: url('img/dots.png') center center fixed;
+}
+
+#bg {
+    opacity: 0.8;
+}
+
+article.blogcontent {
+    background: black;
+    opacity: 0.8;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 30px;
+    transition: all 1s;
+}
+
+.blog {
+    margin: 10px auto 0px;
+    height: 580px;
+    overflow-y: scroll;
+    width: 870px;
+}
+
+::selection {
+    background: #ff5f3e
+}
+
+/*chrome scroll bar */
+
+/*::-webkit-scrollbar {
+    width: 8px;
+    height: 3px;
+}
+
+::-webkit-scrollbar-track-piece {
+    background-color: #ffffff;
+    -webkit-border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+    height: 5px;
+    background-color: #666;
+    -webkit-border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+    width: 5px;
+    background-color: #666;
+    -webkit-border-radius: 3px;
+}*/
+
+/*.scrollbar {
+    background: gray;
+    border-radius: 4px;
+    border: 2px solid gray;
+    border-top-color: #666;
+    line-height: 0;
+    position:absolute;
+    top: 0px;
+    left: 10px;
+    height: 500px;
+    width: 5px;
+}
+.handle{
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+    line-height: 0;
+    box-shadow: 0 1px 0 #555;
+    position: absolute;
+    top: 0px;
+    height: 100px;
+}*/
+
+/***
+ layout */
+
+#leftmenu {
+    min-width: 220px;
+
+    border: 1px solid #c0c0c0;
+    padding: 10px 5px;
+    background-color: #CCCCCC;
+    position: fixed;
+    left: 0px;
+    bottom: 0;
+    top: 44px;
+    text-align: left;
+}
+
+#leftmenu h3 a, #leftmenu li a {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left;
+    color: #000000;
+}
+
+#leftmenu li a {
+    color: #807878;
+}
+
+#leftmenu h3, #leftmenu ul {
+    color: #333333;
+    background-color: #f5f5f5;
+    border-color: #dddddd;
+    padding: 1px 15px;
+    border-bottom: 1px solid transparent;
+
+}
+
+#leftmenu ul li:hover {
+    background-color: #c0c0c0;
+}
+
+#leftmenu li {
+    font-size: 12px;
+    text-align: center;
+}
+
+.page {
+    margin-left: 237px;
+
+    margin-top: 10px;
+    padding: 30px 15px 15px;
+    /*border: 1px solid #DDDDDD;*/
+    /*border-radius: 4px;*/
+    position: relative;
+    word-wrap: break-word;
+    /*background-color: #F5F5F5;*/
+    /*color: #9DA0A4;*/
+    content: "Container";
+    font-size: 12px;
+    font-weight: bold;
+    left: -1px;
+    padding: 3px 7px;
+    /*position: absolute;*/
+    top: -1px;
+}
+
+#top_nav .logo a {
+    width: 212px;
+}
+
+#top_nav ul li {
+    margin-bottom: -1px;
+    margin-right: 15px;
+}
+
+#top_nav ul li a {
+    padding-top: 8px;
+    padding-bottom: 10px;
+    line-height: 20px;
+    border: 1px solid transparent;
+    /*-webkit-border-radius: 4px 4px 0 0;*/
+    /*-moz-border-radius: 4px 4px 0 0;*/
+    /*border-radius: 4px 4px 0 0;*/
+    padding-right: 12px;
+    padding-left: 12px;
+    margin-right: 2px;
+}
+
+#top_nav ul li a:hover {
+    background-color: white;
+    color: black
+}
+
+#top_nav ul  .active a {
+    background-color: white;
+    color: black
+}
+
+#footer {
+    height: 30px;
+    background-color: darkblue;
+    position: fixed;
+    bottom: 0;
+}
+
+/*** dashboard */
+.s-pk-mod {
+    background: #007dc8;
+    width: 398px;
+    border: 1px solid #007dc8;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.s-pk-mod .pk-title {
+    border-bottom: 1px solid #eee;
+    color: #fff;
+    height: 29px;
+    line-height: 30px;
+    font-size: 14px;
+    padding-left: 19px;
+    cursor: move;
+    position: relative;
+    _line-height: 29px;
+    background-color: #007dc8;
+}
+
+.s-pk-mod .pk-title {
+    color: #fff;
+    line-height: 30px;
+    font-size: 14px;
+    cursor: move;
+}
+
+.mod-pk a, .mod-pk a:link, .s-notify-pnl a, .s-notify-pnl a:link {
+    color: #0360af;
+}
+
+.s-pk-mod .pk-close {
+    position: absolute;
+    margin: 0;
+    top: 5px;
+    right: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: #EAEAEA;
+    font-family: 宋 体;
+    background: url('img/cube_d8237111.png') no-repeat -224px -11px;
+}
+
+.s-mod-close-view {
+    background-position: 5px -135px;
+}
+
+.s-mod-close-view {
+    float: right;
+    margin: 5px 4px 0 4px;
+    cursor: pointer;
+    font-size: 1px;
+    width: 20px;
+    height: 20px;
+}
+
+.s-pk-mod .pk-title .s-title-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    background: url('img/cube_d8237111.png') no-repeat -1px -53px;
+    width: 100%;
+    _width: 398px;
+    height: 29px;
+}
+
+/**组件 */
+.feeds_search_condition {
+    border: 1px solid #ccc;
+    height: auto;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+}
+
+.feeds_search_condition h2 {
+    background-color: #eee;
+    padding-left: 10px;
+}
+
+.feeds_search_condition .conditions  div {
+    /*margin-left: 140px*/
+}
+.feeds_search_condition form{
+    padding: 12px;
+}
+
+/* 页面*/
+#top_nav .right_nav {
+    width: 150px;
+    float: right;
+    margin-top: -41px;
+    color: white;
+
+}
+
+#top_nav .right_nav span {
+    font-size: 15px;
+}
+
+#top_nav .right_nav .add-on a {
+    margin-right: 5px;
+}
+
+#top_nav .right_nav .add-on .has_message {
+    position: absolute;
+    margin-left: -8px;
+    margin-top: 6px;
+    color: white;
+    border: 1px solid red;
+    height: 11px;
+    line-height: 11px;
+    background-color: red;
+    width: 11px;
+    border-radius: 8px;
+}
+
+.reunioncontent .content {
+
+    overflow-y: scroll;
+}
+
+.reunioncontent .conditions div ul li {
+    float: left;
+    margin-right: 20px;
+}
+
+.conditions .condition-title {
+    width: 220px;
+    display: inline-block;
+    float: left;
+}
+.conditions .condition-cboxs{
+    float: left;
+
+}
+
+.mod-pk .s-pk-col {
+    width: 400px;
+    float: left;
+}
+
+@media screen and (max-width:1090px) {
+    .login-form {
+        width: 300px;
+    }
+
+    .icon-pass {
+        top: 220px;
+        margin-top: 20px;
+    }
+
+    .login-form .footer {
+        padding: 25px 30px 40px 50px;
+    }
+
+    .right_nav {
+        position: absolute;
+        background-color: saddlebrown;
+        z-index: 999;
+        width: 100%;
+    }
+
+}
+
+.hidden {
+    display: none
+}
+
+.button-group {
+    text-align: center
+}

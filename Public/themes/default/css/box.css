@@ -1,0 +1,71 @@
+.box.box-bordered.box-color .box-title {
+    border-color: #368EE0;
+}
+
+.box.box-bordered .box-title {
+    border: 2px solid #DDDDDD;
+}
+
+.box.box-color .box-title {
+    background: none repeat scroll 0 0 #368EE0;
+}
+
+.box .box-title {
+    border-bottom: 1px solid #DDDDDD;
+    margin-top: 20px;
+    padding: 1px 0 30px 10px;;
+}
+
+.box.box-color .box-title h3 {
+    color: #FFFFFF;
+}
+
+.box .box-title h3 {
+    color: #444444;
+    float: left;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    margin: 3px 0;
+    font-size: 14px;
+}
+
+.box .box-title h3 i {
+    margin: 0 10px 0 5px;
+}
+
+.box .box-title .actions {
+    float: right;
+    margin-right: 10px;
+    margin-top: 0;
+}
+
+.box.box-color .box-title .actions > a {
+    color: #FFFFFF;
+}
+
+.box .box-title .actions .btn {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    color: #333333;
+    padding: 5px 9px;
+}
+
+.box.box-bordered.box-color .box-content {
+    border-color: #368EE0;
+}
+
+.box.box-bordered .box-content {
+    border-image: none;
+    border-right: 2px solid #DDDDDD;
+    border-style: none solid solid;
+    border-width: 0 2px 2px;
+}
+
+.box .box-content {
+    background: none repeat scroll 0 0 #FFFFFF;
+    padding: 20px;
+}
+
+.box.box-bordered .table {
+    margin-bottom: 0;
+}

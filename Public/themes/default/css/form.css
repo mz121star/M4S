@@ -1,0 +1,54 @@
+.icheckbox_minimal-blue{display: inline-block;}
+/*
+form
+*/
+.form-horizontal.form-bordered .form-group {
+    background: none repeat scroll 0 0 #F6F6F6;
+    border-bottom: 1px solid #DDDDDD;
+    margin: 0;
+    padding: 0;
+}
+
+.form-horizontal.form-bordered .form-group .control-label {
+    color: #555555;
+    margin: 0;
+    top: 10px;
+}
+
+.form-con {
+    padding: 10px;
+    border-left: 1px solid #DDDDDD
+}
+
+.form-horizontal .control-label {
+    text-align: left;
+    width: 140px;
+}
+
+.info {
+    top: 9px;
+}
+
+.form-text-middle {
+    padding: 10px
+}
+
+.td-border > td {
+    border-left: 1px solid #DDDDDD
+}
+
+/*.nowidth {*/
+/*width: inherit !important;*/
+/*}*/
+
+.form-alert-contro-label{
+    color: #555555;
+    margin: 0;
+    top: 10px;
+    text-align: left;
+}
+.form-alert-checkbox{
+    display: inline-block;
+    width: 40%;
+    margin-left: 10px;
+}

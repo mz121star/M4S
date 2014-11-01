@@ -1,0 +1,171 @@
+<article  xmlns="http://www.w3.org/1999/html">
+    <div class="row-fluid form-horizontal">
+        <div class="span6 ">
+            <div class="control-group">
+                <label class="control-label" >名称</label>
+                <div class="controls">
+                    <input type="text"  ng-model="search.name" class="m-wrap span6" />
+                </div>
+            </div>
+        </div>
+        <div class="span6 ">
+            <div class="control-group">
+                <label class="control-label" >状态</label>
+                <div class="controls">
+                    <select class="m-wrap span6" ng-model="search.status" >
+                        <option value="">-- 请选择 --</option>
+                        <option value="1">已发布</option>
+                        <option value="2">拒绝</option>
+                        <option value="3">撤销</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12 responsive" data-tablet="span12 fix-offset" data-desktop="span12">
+            <div class="portlet-title searchbutton">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button class="btn yellow"  ng-click=query()>
+                    <i class="icon-eye-open"></i>
+                    查询
+                </button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button class="btn blue">
+                    <i class="icon-undo"></i>
+                    重置
+                </button>
+            </div>
+        </div>
+        <div class="portlet-body">
+        &nbsp;
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12 responsive" data-tablet="span12 fix-offset" data-desktop="span12">
+            <div class="portlet box grey">
+                <div class="portlet-title">
+                    <div class="caption"><i class="icon-user"></i>活动管理</div>
+                </div>
+                <div class="portlet-body">
+                    <table datatable id="sample-table-2" class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>活动编号</th>
+                            <th>活动标题</th>
+                            <th>开展时间</th>
+                            <th>结束时间</th>
+                            <th>活动状态</th>
+                            <th style="width: 23%">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat='template in ActivityList.list'>
+                            <td>{{template.line}}</td>
+                            <td>{{template.num}}</td>
+                            <td>{{template.name}}</td>
+                            <td>{{template.begintime}}</td>
+                            <td>{{template.end}}</td>
+
+                            <td>{{template.status | statuss:status}}</td>
+                            <td>
+                                <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                    <span class="btn mini yellow" ng-Model="template" title="修改" ng-click=edit(template) data-toggle="modal" data-target="#example">
+                                        <i class="icon-edit bigger-120"></i>
+                                        查看报名
+                                    </span>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="row-fluid top">
+                        <div class="span12 responsive paginationtop">
+                            <div class="dataTables_paginate  paging_bootstrap pagination">
+                                <ul>
+                                    <li class="prev">
+                                        <a href="javascript:;" ng-click="PagerPrev()">← <span class="hidden-480">前一页</span></a>
+                                    </li>
+                                    <li   ng-class="{active : $index==ActivityList.pagenum-1}"   ng-repeat="n in []|PagerRange:ActivityList.pagecount">
+                                        <!--  <a href="#">{{TemplateList.pagecount}}</a>-->
+                                        <a href="javascript:;" ng-click="PagerData(n+1)">{{n+1}}</a>
+                                    </li>
+
+                                    <li class="next">
+                                        <a href="javascript:;" ng-click="PagerAfter()"><span class="hidden-480">后一页</span> → </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+
+<div id="example" class="modal fade" tabindex="-1">
+    <div class="row-fluid">
+        <div class="span12 responsive" data-tablet="span12 fix-offset" data-desktop="span12">
+            <div class="portlet box blue">
+                <div class="portlet-title ">
+                    <div class="caption"><i class="icon-user"></i>查看报名明细</div>
+                    <div class="actions">
+                        <a href="#" class="close red" data-dismiss="modal" aria-hidden="true"></a>
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <table datatable  class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>车牌号</th>
+                            <th>状态</th>
+                            <th style="width: 23%">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat='template in ActivityJoinList.list'>
+                            <td>{{template.line}}</td>
+                            <td>{{template.carNum}}</td>
+                            <td>{{template.status | join:status}}</td>
+                            <td>
+                                <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                    <span class="btn mini yellow" ng-Model="template" title="修改" ng-click=cancel(template) >
+                                        <i class="icon-edit bigger-120"></i>
+                                        取消
+                                    </span>
+                                    <span class="btn mini yellow" ng-Model="template" title="修改" ng-click=join(template)>
+                                        <i class="icon-edit bigger-120"></i>
+                                        参加
+                                    </span>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="row-fluid top">
+                        <div class="span12 responsive paginationtop">
+                            <div class="dataTables_paginate  paging_bootstrap pagination">
+                                <ul>
+                                    <li class="prev">
+                                        <a href="javascript:;" ng-click="PagerJoinPrev()">← <span class="hidden-480">前一页</span></a>
+                                    </li>
+                                    <li   ng-class="{active : $index==ActivityJoinList.pagenum-1}"   ng-repeat="n in []|PagerRange:ActivityJoinList.pagecount">
+                                        <!--  <a href="#">{{TemplateList.pagecount}}</a>-->
+                                        <a href="javascript:;" ng-click="PagerJoinData(n+1)">{{n+1}}</a>
+                                    </li>
+
+                                    <li class="next">
+                                        <a href="javascript:;" ng-click="PagerJoinAfter()"><span class="hidden-480">后一页</span> → </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

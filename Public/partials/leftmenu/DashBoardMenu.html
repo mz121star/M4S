@@ -1,0 +1,27 @@
+<div class="subnav">
+    <div class="subnav-title">
+        <a class='toggle-subnav' data-toggle="collapse" data-toggle="collapse" href="#widget-nav"><i
+                class="glyphicon glyphicon-chevron-down"></i><span>Valid Charts</span></a>
+    </div>
+  <ul class="subnav-menu collapse in" id="widget-nav">
+
+       <!--  <button class="btn btn-primary btn-xs" ng-click="refresh()">Refresh</button>-->
+         <li class="widgets-menu" ng-repeat="w in Dashboard.Widgets">
+             <img class="mimg" title="{{w.Description}}" ng-src="widgets/{{w.Name}}/index.jpg" width="50" height="50"/>
+
+             <span class="mtitle" title="{{w.Title}}">{{w.Title|maxlen:20}}</span>
+
+             <span class="op"><a ng-click="addWidget(w._id,$event)" href="javascript:;"><i
+                     class="fa fa-plus"></i></a></span>        <br>
+             <span class="mprice"  ng-class="{price : !!w.Price , free:!!!w.Price}">(Price:{{w.Price}}$)</span>
+         </li>
+
+
+     </ul>
+
+
+
+</div>
+
+
+

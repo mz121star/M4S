@@ -1,0 +1,89 @@
+<div class="subnav">
+    <div class="subnav-title">
+        <a class='toggle-subnav' data-toggle="collapse" data-toggle="collapse" href="#subnav1"><i
+                class="glyphicon glyphicon-chevron-down"></i><span>Analysis Type</span></a>
+    </div>
+    <ul class="subnav-menu collapse in" id="subnav1">
+
+
+        <li><a ng-click="Analysis.toBasicAnalysis()" class="button sub lefttree"
+               href="javascript:;"><span>Basic Chart</span> </a></li>
+        <li><a ng-click="Analysis.toReoresentaticeArticles()" class="button sub lefttree" href="javascript:;"><span>Representative Articles</span>
+        </a></li>
+        <li><a ng-click="Analysis.toCustomerAnalysis()" class="button sub lefttree" href="javascript:;"><span>User Classification</span>
+        </a></li>
+
+    </ul>
+</div>
+
+<div class="subnav">
+    <div class="subnav-title">
+        <a class='toggle-subnav' data-toggle="collapse" data-toggle="collapse" href="#subnav2"><i
+                class="glyphicon glyphicon-chevron-down"></i><span>Topics</span></a>
+    </div>
+    <ul class="subnav-menu collapse" id="subnav2">
+
+
+        <li ng-repeat="topic in Topics">
+            <a ng-click="topicSelected(topic,$index);Feeds.changeStyle($index)" class="button sub lefttree"
+               ng-class="{selected: $index==feedSelectRow}" href="javascript:;">
+                {{topic.Name}}
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div class="subnav">
+    <div class="subnav-title">
+        <a class='toggle-subnav' data-toggle="collapse" data-toggle="collapse" href="#subnav3"><i
+                class="glyphicon glyphicon-chevron-down"></i><span>Operation</span></a>
+    </div>
+    <ul class="subnav-menu collapse in" id="subnav3">
+
+        <div class="container">
+        <button class="btn btn-primary " data-toggle="modal" data-target="#selectReportChart"> Add New
+            Chart
+        </button>       </div>
+
+    </ul>
+</div>
+<!--
+<div class="navlist">
+    <a class="button" href="javascript:;"><span>Overview</span><span class="close"></span></a>
+    <a class="button" href="javascript:;" ><span>Analysis Type</span><span
+            class="open"></span></a>
+
+    <div class="navlist">
+
+
+        <a ng-click="Analysis.toBasicAnalysis()" class="button sub lefttree" href="javascript:;" ><span>Basic Chart</span> </a>
+        <a ng-click="Analysis.toReoresentaticeArticles()" class="button sub lefttree" href="javascript:;" ><span>Representative Articles</span> </a>
+        <a ng-click="Analysis.toCustomerAnalysis()" class="button sub lefttree" href="javascript:;" ><span>User Classification</span> </a>
+
+
+
+
+    </div>
+    <a class="button" href="javascript:;"><span>Topics</span><span class="open"></span></a>
+
+    <div class="navlist">
+
+
+        <a ng-click="topicSelected(topic,$index);Feeds.changeStyle($index)" class="button sub lefttree" ng-class="{selected: $index==feedSelectRow}"  href="javascript:;" ng-repeat="topic in Topics">
+            <span>{{topic.Name}}  </span>
+        </a>
+
+
+        <div class="search">
+            <div class="group last" style="text-align:right;">
+                <button class="btn btn-primary " data-toggle="modal" data-target="#selectReportChart"> Add New
+                    Chart
+                </button>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>-->

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<select id="category">
+    <option selected value="PCs & Laptops>Laptops / Notebooks>All Laptops / Notebooks">NoteBooks</option>
+    <option value="PCs & Laptops>Ultrabooks>All Ultrabooks">UltraBook</option>
+    <option value="Best Buy>Audio & MP3>iPod & MP3 Players">MP3 Players</option>
+
+</select>
+<div id='canvas'></div>
+<script src="../../lib/jquery/jquery-1.8.2.min.js"></script>
+<script src="../../lib/ichart.1.2.src.js"></script>
+<script src="../../lib/Uri.js"></script>
+<script>
+
+    (function (window, $) {
+        var screenWidth, data, uri;
+        uri = new Uri(document.URL)
+        var search = uri.query().replace("?", "");
+
+
+        $(window).resize(function () {
+            Draw(data,$("#category").val());
+        });
+        var getRandomColor = function(){
+            return  '#' +
+                    (function(color){
+                        return (color +=  '0123456789abcdef'[Math.floor(Math.random()*16)])
+                                && (color.length == 6) ?  color : arguments.callee(color);
+                    })('');
+        }
+        var colors = ["#4572a7", "#aa4643", "#89a54e", '#80699b','#f8a31f'];
+        var Draw = function (d,title) {
+
+
+            var chart = new iChart.Pie3D({
+                render : 'canvas',
+                data: d,
+                title : {
+                    text : title,
+                    height:40,
+                    fontsize :10,
+                    color : '#282828'  ,
+                    padding : '0 38'
+                },
+                footnote : {
+                    text : 'Power By Reunion',
+                    color : '#486c8f',
+                    fontsize : 12,
+                    padding : '0 38'
+                },
+                sub_option : {
+                    mini_label_threshold_angle : 40,//迷你label的阀值,单位:角度
+                    mini_label:{//迷你label配置项
+                        fontsize:12,
+                        fontweight:600,
+                        color : '#ffffff'
+                    },
+                    label : {
+                        background_color:null,
+                        sign:false,//设置禁用label的小图标
+                        padding:'0 4',
+                        border:{
+                            enable:false,
+                            color:'#666666'
+                        },
+                        fontsize:11,
+                        fontweight:200,
+                        color : '#4572a7'
+                    },
+                    border : {
+                        width : 2,
+                        color : '#ffffff'
+                    },
+                    listeners:{
+                        parseText:function(d, t){
+                            return d.get('value')+"%";//自定义label文本
+                        } ,
+                        /**
+                         * r:iChart.Rectangle2D对象
+                         * e:eventObject对象
+                         * m:额外参数
+                         */
+                        click:function(r,e,m){
+
+                            console.log(r.get('name')+' '+r.get('value')+ r.get('color'));
+                        }
+                    }
+                },
+                legend:{
+                    enable:true,
+                    padding:0,
+                    offsetx:20,
+                    offsety:10,
+                    color:'#3e576f',
+                    fontsize:20,//文本大小
+                    sign_size:20,//小图标大小
+                    line_height:28,//设置行高
+                    sign_space:10,//小图标与文本间距
+                    border:false,
+                    align:'left',
+                    background_color : null//透明背景
+                },
+                shadow : true,
+                shadow_blur : 6,
+                shadow_color : '#aaaaaa',
+                shadow_offsetx : 0,
+                shadow_offsety : 0,
+                background_color:'#f1f1f1',
+                align:'right',//右对齐
+                offsetx:-100,//设置向x轴负方向偏移位置60px
+                offset_angle:-90,//逆时针偏移120度
+                width: document.body.clientWidth,
+                height: 300,
+                border: false,
+                animation: true,
+                background_color:'#fff',
+                animation_duration: 100,//700ms完成动画
+                radius:150
+            });
+            //利用自定义组件构造右侧说明文本
+           /* chart.plugin(new iChart.Custom({
+                drawFn:function(){
+                    //在右侧的位置，渲染说明文字
+                    chart.target.textAlign('start')
+                            .textBaseline('top')
+                            .textFont('600 20px Verdana')
+                            .fillText('Market Fragmentation:\nTop Mobile\nOperating Systems',120,80,false,'#be5985',false,24)
+                            .textFont('600 12px Verdana')
+                            .fillText('Source:ComScore,2012',120,160,false,'#999999');
+                }
+            }));*/
+
+            chart.draw();
+
+        }
+        var getData=function(){
+            $.post('/api/MarketSharePost', search+"&category="+encodeURIComponent($("#category").val())).success(function (d) {
+                //搜索来源饼图
+                /***
+                 * 按数量进行排序
+                 */
+               d.sort(function(a,b){
+                    return a.value -b.value;
+                }).reverse()
+                var count= 0,other=0
+                /*取总数*/
+                for(var i= 0,len= d.length;i<len;i++){
+                    count+=parseFloat(d[i].value);
+                    if(i>4){
+                        other+=parseFloat(d[i].value);
+                    }
+                }
+                for(var i= 0,len= d.length;i<len;i++){
+                    d[i].value= (parseFloat(d[i].value)/count*100).toFixed(2)
+                    d[i].color=colors[i];
+
+                }
+                d= d.splice(0,5);
+                d.push({
+                    name:"other",
+                    value:(parseFloat(other/count*100)).toFixed(2),
+                    color:"#ace"
+                })
+
+                console.log(d);
+                data=d;
+                Draw(d,$("#category").val());
+            })
+        }
+        getData();
+        $("#category").on("change",function(){
+            getData();
+        })
+    })(window, jQuery)
+
+</script>
+</body>
+</html>

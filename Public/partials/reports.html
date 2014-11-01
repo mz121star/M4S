@@ -1,0 +1,133 @@
+<div class="panel">
+
+
+    <div ng-show="!!sendSuccess" class="alert alert-success"> {{ sendSuccess }}</div>
+    <div ng-show="!!sendError" class="alert alert-error"> {{ sendError }}</div>
+
+    <pr-box>
+            <table id="reportsTable" class="table">
+                <thead>
+                <tr>
+                    <th class="w30">No.</th>
+                    <th sortable>Title</th>
+                    <th>Type</th>
+                    <th>MailTo</th>
+                    <th>Create Date</th>
+                    <th>Action</th>
+
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="report in subReports" ng-click="showDetail(report)" showdetail>
+                    <td>{{ $index+1 }}</td>
+                    <td>{{report.Name }}</td>
+                    <td>{{report.Type }}</td>
+                    <td>{{report.Receiver }}</td>
+                    <td>{{report.UpdateDate | date:'yyyy-MM-dd' }}</td>
+                    <td>
+                        <button class="btn btn-primary" ng-click="changeSubStatus(report)">{{report.Status |numToTxt}}</button>
+                        <!--<button class="btn btn-primary" data-toggle="modal" ng-click="showPreview(report._id)"  data-target="#subPreviewModal">Preview </button>-->
+                        <a class="btn btn-primary"   href="api/subReportPreview/{{report._id}}" target="_blank">Preview</a>
+                        <button class="btn btn-primary" data-loading-text="Sending..." ng-click="sendSubReport(report,$event)">Send
+                        </button>
+
+                        <button class="btn btn-primary" ng-click="editSubReport(report)">Edit</button>
+                        <button class="btn btn-danger" ng-click="delSubReport(report)">Delete</button>
+                        <!-- subReportPreview/{{report._id}}-->
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+    </pr-box>
+    </div>
+</div>
+
+<div style="display: none;width: 900px;margin: -250px 0 0 -450px;" class="modal fade" id="subPreviewModal" tabindex="-1"
+     role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Preview</h4>
+            </div>
+            <div class="modal-body">
+
+                <div style="width: 800px;height: 400px">
+                    <iframe ng-src="{{subPreview_URL}}" style="     width: 800px;         height: 500px; "/>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div style="display: none" class="modal fade" id="saveReportModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel"
+     aria-hidden="true">
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">{{editWindowTitle}}</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="editpanel">
+
+                    <div class="content">
+                        <div class="left"><span class="title">Report Type</span></div>
+                        <div class="center">
+
+                       <span class="item" ng-repeat="dt in report.dataType">
+                               <label><input pr-check type="radio" name="dataType" ng-value="dt.value" ng-model="report.type">{{dt.value}}</label>
+                         </span>
+                        </div>
+                        <div class="right"></div>
+                    </div>
+
+                    <div class="content">
+                        <div class="left"><span class="title">MailTo</span></div>
+                        <div class="center">
+                            <textarea ng-model="report.receiver">abc@pactera.com</textarea>
+                        </div>
+                        <div class="right"></div>
+                    </div>
+
+
+                    <div class="content">
+                        <div class="left"><span class="title">Topic</span></div>
+                        <div class="center">
+                            <span class="item" ng-repeat="topic in Topics">
+                          <label> <input class="checkbox" type="checkbox" name="sourceType" ng-checked="topic.checked"
+                                         ng-model="topic.checked" value="{{topic.type}}"/>{{topic.type}}</label>
+                            </span>
+
+                        </div>
+                        <div class="right"></div>
+                    </div>
+
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <div ng-show="!!saveTopicWarning" class="alert alert-success"> {{ saveTopicWarning }}</div>
+                <div ng-show="!!saveTopicError" class="alert alert-error"> {{ saveTopicError }}</div>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary" ng-disabled="!!!report.receiver" ng-click="addReport()">Save</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

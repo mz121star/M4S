@@ -1,0 +1,210 @@
+<div class="panel">
+    <pr-box>
+        <table id="css_table" class="table">
+            <thead>
+            <tr >
+                <th class="w5-p"><i class="fa fa-plus-square"></i></th>
+                <th class="w12-p">Title</th>
+                <th class="w15-p">Keywords</th>
+                <th class="w24-p">MailTo</th>
+                <th class="w12-p">SMSTo</th>
+                <th class="">DataRange</th>
+                <th class="">Action</th>
+            </tr>
+            </thead>
+            <tbody ng-repeat="alert in alerts" showdetail>
+            <tr>
+                <td class=" openlist" data-id="{{alert._id}}" data-queryover="0"  toggletable  ><i class="fa fa-plus-square"></i> </td>
+                <td class=" w150">{{alert.Name }}</td>
+                <td class=" w100">{{alert.Keyword }}</td>
+                <td class=" w200">{{alert.MailTo }}</td>
+                <td class=" w100">{{alert.SMSTo }} </td>
+                <td class=" w150">{{alert.AlertStartTime |date }}-{{alert.AlertEndTime |date }}</td>
+                <td class="last"> <button class="btn btn-primary" data-toggle="modal" ng-click="editAlert(alert)"
+                                          data-target="#saveReportModal">Edit</button></td>
+            </tr>
+            <tr class="subrow">
+                <td colspan="7" class="subrowtd">
+                    <table class="subtable">
+                        <tr class="thead">
+                            <td class="w30">N0.</td>
+                            <td sortable>Title</td>
+                            <td>Description</td>
+                            <td>Source</td>
+                            <td>Url</td>
+                        </tr>
+                        <tr class="tbody" ng-repeat="feed in feedContent" showdetail data-toggle="modal" ng-click="showDetail(feed)" data-target="#myModal" >
+                            <td>{{ $index+1 }}</td>
+                            <td>{{feed.Title| maxlen:20  }} </td>
+                            <td>{{feed.Content | maxlen:40  }} </td>
+                            <td>{{ feed.FromSite | maxlen:40}}</td>
+                            <td><a ng-href="feed.FromUrl">{{feed.FromUrl}}</a></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </pr-box>
+</div>
+<div style="display: none" class="modal fade" id="saveReportModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel"
+     aria-hidden="true">
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">{{editWindowTitle}}</h4>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal form-bordered " role="form" novalidate   name="alertForm">
+                    <div class="form-group">
+                        <label  class="col-sm-3 form-alert-contro-label ">Name:</label>
+                        <div class="col-sm-9 form-con">
+                            <input type="text" class="form-control col-md-6" ng-model="alert.name" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label  class="col-sm-3 form-alert-contro-label ">Keyword:</label>
+                        <div class="col-sm-9 form-con">
+                            <input type="text" class="form-control col-md-6" ng-model="alert.keywords" required>
+                        </div>
+                    </div>
+                    <div class="form-group form-inline">
+                        <label  class="col-sm-3 form-alert-contro-label ">Mail To:</label>
+                        <div class="col-sm-9 form-con">
+                            <textarea ng-model="alert.maito" required class="form-control" rows="3">abc@pactera.com</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group form-inline">
+                        <label  class="col-sm-3 form-alert-contro-label ">SMS To:</label>
+                        <div class="col-sm-9 form-con">
+                            <textarea ng-model="alert.smsto" required class="form-control" rows="3">13848866666</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group form-inline">
+                        <label  class="col-sm-3 form-alert-contro-label ">Topic:</label>
+                        <div class="col-sm-9 form-con">
+                            <label class="checkbox-inline form-alert-checkbox" ng-repeat="topic in Topics">
+                                <input class="checkbox" type="checkbox" name="sourceType" ng-checked="topic.checked"
+                                       pr-check    ng-model="topic.checked" value="{{topic.type}}"/>{{topic.type}}
+                            </label>
+
+                        </div>
+                    </div>
+                    <div class="form-group form-inline">
+                        <label  class="col-sm-3 form-alert-contro-label ">Semantic:</label>
+                        <div class="col-sm-9 form-con">
+                            <label class="checkbox-inline form-alert-checkbox"> <input   class="checkbox" type="checkbox" name="semantic"  value="1"/>Good</label>
+                            <label class="checkbox-inline form-alert-checkbox"> <input   class="checkbox" type="checkbox" name="semantic"  value="-1"/>Bad</label>
+               </div>
+           </div>
+           <div class="form-group form-inline">
+               <label  class="col-sm-3 form-alert-contro-label ">Time Range:</label>
+               <div class="col-sm-9 form-con">
+                   <input bs-datepicker type="text" class="form-control col-md-5" ng-model="alert.startTime" name="startTime">
+                   <span class="pull-left form-text-middle">to</span>
+                   <input bs-datepicker type="text" class="form-control col-md-5" ng-model="alert.endTime">
+               </div>
+           </div>
+       </form>
+
+
+
+
+
+       <!--<form  name="alertForm">-->
+                    <!--<div class="editpanel">-->
+
+                        <!--&lt;!&ndash;<div class="content">-->
+                            <!--<div class="left"><span class="title">报告类型</span></div>-->
+                            <!--<div class="center">-->
+
+                           <!--<span class="item" ng-repeat="dt in report.dataType">-->
+                                   <!--<label><input type="radio" name="dataType" ng-value="dt.value" ng-model="report.type">{{dt.value}}</label>-->
+                             <!--</span>-->
+                            <!--</div>-->
+                            <!--<div class="right"></div>-->
+                        <!--</div>&ndash;&gt;-->
+                        <!--<div class="content">-->
+                            <!--<div class="left"><span class="title">Name:</span></div>-->
+                            <!--<div class="center">-->
+                                <!--<input type="text" ng-model="alert.name" required /> &lt;!&ndash;<label><input-->
+                                    <!--type="checkbox"  />使用正则</label>&ndash;&gt;-->
+                            <!--</div>-->
+                            <!--<div class="right"></div>-->
+                        <!--</div>-->
+                        <!--<div class="content">-->
+                            <!--<div class="left"><span class="title">KeyWords:</span></div>-->
+                            <!--<div class="center">-->
+                                <!--<input type="text" ng-model="alert.keywords" required /> &lt;!&ndash;<label><input-->
+                                    <!--type="checkbox"  />使用正则</label>&ndash;&gt;-->
+                            <!--</div>-->
+                            <!--<div class="right"></div>-->
+                        <!--</div>-->
+
+                        <!--<div class="content">-->
+                            <!--<div class="left"><span class="title">Mail To:</span></div>-->
+                            <!--<div class="center">-->
+                                <!--<textarea ng-model="alert.maito" required>abc@pactera.com</textarea>-->
+                            <!--</div>-->
+                            <!--<div class="right"></div>-->
+                        <!--</div>-->
+
+                        <!--<div class="content">-->
+                            <!--<div class="left"><span class="title">SMS To:</span></div>-->
+                            <!--<div class="center">-->
+                                <!--<textarea ng-model="alert.smsto" required>13848866666</textarea>-->
+                            <!--</div>-->
+                            <!--<div class="right"></div>-->
+                        <!--</div>-->
+
+                        <!--<div class="content">-->
+                            <!--<div class="left"><span class="title">Topic</span></div>-->
+                            <!--<div class="center">-->
+                            <!--<span class="item"  ng-repeat="topic in Topics">-->
+                              <!--<label> <input   class="checkbox" type="checkbox" name="sourceType" ng-checked="topic.checked"-->
+                                         <!--ng-model="topic.checked" value="{{topic.type}}"/>{{topic.type}}</label>-->
+                            <!--</span>-->
+
+                            <!--</div>-->
+                            <!--<div class="right"></div>-->
+                        <!--</div>-->
+                        <!--<div class="content">-->
+                            <!--<div class="left"><span class="title">Semantic</span></div>-->
+                            <!--<div class="center">-->
+                                 <!--<span class="item"  > <label> <input   class="checkbox" type="checkbox" name="semantic"  value="1"/>Good</label></span>-->
+                                     <!--<span class="item"  > <label> <input   class="checkbox" type="checkbox" name="semantic"  value="-1"/>Bad</label>    </span>-->
+
+
+                            <!--</div>-->
+                            <!--<div class="right"></div>-->
+                        <!--</div>-->
+                        <!--<div class="content">-->
+                            <!--<div class="left"><span class="title">Time Range </span></div>-->
+                            <!--<div class="center">-->
+                                <!--<input bs-datepicker type="text" ng-model="alert.startTime" name="startTime">-->
+                                                                     <!--to-->
+                                <!--<input bs-datepicker type="text" ng-model="alert.endTime">-->
+
+                            <!--</div>-->
+                            <!--<div class="right"></div>-->
+                        <!--</div>-->
+
+
+                    <!--</div>-->
+                <!--</form>-->
+            </div>
+            <div class="modal-footer">
+                <div ng-show="!!saveTopicWarning" class="alert alert-success"> {{ saveTopicWarning }}</div>
+                <div ng-show="!!saveTopicError" class="alert alert-error"> {{ saveTopicError }}</div>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary" ng-disabled='alertForm.$invalid' ng-click="addAlert()">Save</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

@@ -1,0 +1,52 @@
+<html>
+<head>
+        <style>
+
+            .x200160{
+              width: 200px;
+                height: 160px;
+                float: left;
+                margin-right: 5rem;
+            }
+            .x200160:first-child{
+                margin-left: 5rem;
+            }
+        </style>
+</head>
+<body>
+<div id="gauge1" class="x200160"></div>
+<div id="gauge2" class="x200160"></div>
+<div id="gauge3" class="x200160"></div>
+<script src="raphael.2.1.0.min.js"></script>
+<script src="justgage.1.0.1.js"></script>
+<script src="../../lib/jquery/jquery-1.8.2.min.js"></script>
+<script type='text/javascript'>
+
+    $.post("/api/feeds").success(function (d) {
+
+        var g = new JustGage({
+            id: "gauge1",
+            value: d.todaycount,
+            min: 0,
+            max: 500,
+            title: "Today Feeds"
+        });
+        var g = new JustGage({
+            id: "gauge2",
+            value: d.totalcount,
+            min: 0,
+            max: d.totalcount*1.5,
+            title: "Total Feeds"
+        });
+        var g = new JustGage({
+            id: "gauge3",
+            value: d.countsites,
+            min: 0,
+            max:  d.countsites*2,
+            title: "From Sites"
+        });
+    });
+
+</script>
+</body>
+</html>

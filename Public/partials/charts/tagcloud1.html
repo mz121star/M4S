@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+<script src="../../lib/jquery/jquery-1.8.2.min.js"></script>
+<script src="../../lib/d3/d3.js"></script>
+<script src="../../lib/d3/d3.layout.cloud.js"></script>
+<script>
+    $(function () {
+        var fill = d3.scale.category20();
+        var a = "反正 睫毛膏 睫毛膏 刷上两遍 青春痘 青春痘 越来越 春夏秋三季还会更 越来越 欧莱雅祛痘 越来越  受欢迎 不厚不薄 水产品 这款塑 会很有 护肤品 就会用 就会有  今年冬天 都怕太油 很容易 今年冬天 就少用 很喜欢 会太油 是个好 一整天 新鲜空气 血液循环 很重要 是支花 害咋花 特别是 用这款就 无控油 用这瓶 微胶囊 水感毫 微胶囊 角质层 几乎不 今年冬天 过一段时间 不方便 好极了 碧欧泉 护肤品 护肤品 就会用 就会有 几乎不 今年冬天 很干也 看不出 倒还满 很喜欢 护肤品 不明显 哑光色 控油时长 秋冬季 有搓泥 爽肤水一 都怕太油 很容易 今年冬天 就少用 很喜欢 会太油 是个好 护理产品 人前更有 这款男霜 走下坡路 玻璃瓶 受欢迎 不厚不薄 水产品 这款塑 会很有 护肤品 就会用 就会有 ";
+        var words = a.split(" ")
+        d3.layout.cloud().size([450, 300])
+                .words(words.map(function (d) {
+                    return {text: d, size: 5 + Math.random() * 20};
+                }))
+                .padding(5)
+                .rotate(function () {
+                    return ~~(Math.random() * 2) * 20;
+                })
+                .font("Impact")
+                .fontSize(function (d) {
+                    return d.size;
+                })
+                .on("end", draw)
+                .start();
+
+        function draw(words) {
+            d3.select("body").append("svg")
+                    .attr("width", 450)
+                    .attr("height", 300)
+                    .append("g")
+                    .attr("transform", "translate(150,150)")
+                    .selectAll("text")
+                    .data(words)
+                    .enter().append("text")
+                    .style("font-size", function (d) {
+                        return d.size + "px";
+                    })
+                    .style("font-family", "Impact")
+                    .style("fill", function (d, i) {
+                        return fill(i);
+                    })
+                    .attr("text-anchor", "middle")
+                    .attr("transform", function (d) {
+                        return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+                    })
+                    .text(function (d) {
+                        return d.text;
+                    });
+        }
+    })
+</script>

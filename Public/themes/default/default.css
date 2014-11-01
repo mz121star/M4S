@@ -1,0 +1,19 @@
+@import "css/template.css";
+@import "css/main.css";
+/***设置基础样式的快捷方式，比如颜色，浮动等***/
+@import "css/util.css";
+
+@import "css/box.css";
+@import "css/form.css";
+
+@import "css/table.css";
+@import "css/complextable.css";
+
+/***设置页面头部的日历小插件等***/
+@import "css/widget.css";
+
+    /***设置页面头部的日历小插件等***/
+@import "css/dashboard.css";
+
+/***help样式表***/
+@import "css/help.css";

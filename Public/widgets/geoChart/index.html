@@ -1,0 +1,72 @@
+<html>
+<head>
+             <style>
+                 #chart_div path {
+                    fill:#D6EE98
+                 }
+             </style>
+</head>
+<body>
+<div id="chart_div" style="width: 900px; height: 500px;"></div>
+<!--<script type='text/javascript' src='https://www.google.com/jsapi'></script>-->
+<script type='text/javascript' src='jsapi.js'></script>
+<script type='text/javascript' src='geodata.js'></script>
+<script src="../../lib/jquery/jquery-1.8.2.min.js"></script>
+<script type='text/javascript'>
+    var screenWidth = document.width;
+    var screenHeigth = document.height;
+    var mapWidth = Math.round(((screenWidth / 12) * 10) * 0.8);
+    var mapHeight = Math.round(mapWidth * 0.5);
+
+    document.getElementById("chart_div").setAttribute("height", mapHeight * 1.1);
+    document.getElementById("chart_div").setAttribute("width", mapWidth * 1.1);
+    /*google.load('visualization', '1', {'packages': ['geochart']});*/
+    google.setOnLoadCallback(drawRegionsMap);
+
+    function drawRegionsMap() {
+
+        var data;
+        $.post("/api/feeds").success(function (d) {
+            var count = d.totalcount;
+            var data = google.visualization.arrayToDataTable([
+                ['City', 'Total'],
+                ['辽宁', parseInt(count * 0.05)],
+                ['广东',  parseInt(count * 0.15)],
+                ['福建',  parseInt(count * 0.05)],
+                ['安徽',  parseInt(count * 0.1)],
+                ['云南',  parseInt(count * 0.2)],
+                ['山西',  parseInt(count * 0.05)],
+                ['陕西',  parseInt(count * 0.1)],
+                ['上海',  parseInt(count * 0.2)],
+                ['黑龙江',  parseInt(count * 0.05)],
+                ['吉林',  parseInt(count * 0.1)],
+                ['西藏',  parseInt(count * 0.2)],
+                ['新疆',  parseInt(count * 0.2)],
+                ['甘肃',  parseInt(count * 0.1)],
+                ['四川',  parseInt(count * 0.2)],
+                ['北京',  parseInt(count * 0.3)]
+
+
+            ]);
+            var options = {
+                region: 'CN',
+                 displayMode: 'markers',
+                resolution: 'provinces',
+                backgroundColor : { fill:"#ace",stroke:"#ace",strokeWidth:1},
+                datalessRegionColor:"#E5E5E5"    ,
+                tooltip: {textStyle: {color: '#FF0000'}, showColorCode: true},
+                height: mapHeight,
+                colorAxis: {colors: ['yellow', 'red']},
+                backgroundColor: { fill: 'transparent' }
+            };
+            var geochart = new google.visualization.GeoChart(
+                    document.getElementById('chart_div'));
+            geochart.draw(data, options);
+        });
+
+
+    }
+    ;
+</script>
+</body>
+</html>

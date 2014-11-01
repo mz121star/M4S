@@ -1,0 +1,327 @@
+
+<!DOCTYPE html >
+<html lang="zh-CN" ng-controller="LayoutController">
+<head>
+    <meta charset="utf-8">
+    <style>
+        [ng-cloak] {
+            display: none;
+        }
+    </style>
+    <title ng-bind="title">Loading...</title>
+    <script src="/lib/pace.min.js"></script>
+    <style>.pace { -webkit-pointer-events: none; pointer-events: none; -webkit-user-select: none; -moz-user-select: none; user-select: none; }
+
+    .pace-inactive { display: none; }
+
+    .pace .pace-progress { background: #fe2701; position: fixed; z-index: 2000; top: 0; left: 0; height: 2px; -webkit-transition: width 1s; -moz-transition: width 1s; -o-transition: width 1s; transition: width 1s; }
+
+    .pace .pace-progress-inner { display: block; position: absolute; /* right:0px;*/ width: 100px; height: 100%; box-shadow: 0 0 10px #fe2701, 0 0 5px #fe2701; opacity: 1.0; -webkit-transform: rotate(3deg) translate(0px, -4px); -moz-transform: rotate(3deg) translate(0px, -4px); -ms-transform: rotate(3deg) translate(0px, -4px); -o-transform: rotate(3deg) translate(0px, -4px); transform: rotate(3deg) translate(0px, -4px); }
+
+    .pace .pace-activity { display: block; position: fixed; z-index: 2000; top: 15px; right: 15px; width: 14px; height: 14px; border: solid 2px transparent; border-top-color: #fe2701; border-left-color: #fe2701; border-radius: 10px; -webkit-animation: pace-spinner 400ms linear infinite; -moz-animation: pace-spinner 400ms linear infinite; -ms-animation: pace-spinner 400ms linear infinite; -o-animation: pace-spinner 400ms linear infinite; animation: pace-spinner 400ms linear infinite; }
+
+    @-webkit-keyframes pace-spinner {
+        0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+    }
+
+    @-moz-keyframes pace-spinner {
+        0% { -moz-transform: rotate(0deg); transform: rotate(0deg); }
+        100% { -moz-transform: rotate(360deg); transform: rotate(360deg); }
+    }
+
+    @-o-keyframes pace-spinner {
+        0% { -o-transform: rotate(0deg); transform: rotate(0deg); }
+        100% { -o-transform: rotate(360deg); transform: rotate(360deg); }
+    }
+
+    @-ms-keyframes pace-spinner {
+        0% { -ms-transform: rotate(0deg); transform: rotate(0deg); }
+        100% { -ms-transform: rotate(360deg); transform: rotate(360deg); }
+    }
+
+    @keyframes pace-spinner {
+        0% { transform: rotate(0deg); transform: rotate(0deg); }
+        100% { transform: rotate(360deg); transform: rotate(360deg); }
+    }</style>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/style-metro.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+    <link href="/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/jquery.fileupload-ui.css" rel="stylesheet" />
+    <link href="/css/jasny-bootstrap.min.css" rel="stylesheet" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+
+    <link rel="shortcut icon" href="/image/favicon.ico" />
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="/css/font-awesome-ie7.min.css" />
+    <![endif]-->
+
+    <!-- page specific plugin styles -->
+
+    <!-- fonts -->
+
+
+
+    <!-- ace styles -->
+
+    <link href="/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" type="text/css"/>
+
+    <!--[if lte IE 8]>
+
+    <![endif]-->
+
+    <!-- inline styles related to this page-->
+
+    <script data-main="/js/main" src="/lib/require/require-2.1.0.js"></script>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body class="page-header-fixed">
+<div class="header navbar navbar-inverse navbar-fixed-top">
+    <!-- BEGIN TOP NAVIGATION BAR -->
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <!-- BEGIN LOGO -->
+            <a class="brand" href="index.html">
+                <img src="/image/logo.png" alt="logo">
+            </a>
+            <!-- END LOGO -->
+            <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+            <a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+                <img src="/image/menu-toggler.png" alt="">
+            </a>
+            <!-- END RESPONSIVE MENU TOGGLER -->
+            <!-- BEGIN TOP NAVIGATION MENU -->
+            <ul class="nav pull-right">
+                <!-- BEGIN NOTIFICATION DROPDOWN -->
+                <li class="dropdown" id="header_notification_bar">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon-warning-sign"></i>
+                        <span class="badge">6</span>
+                    </a>
+                    <ul class="dropdown-menu extended notification">
+                        <li>
+                            <p>You have 14 new notifications</p>
+                        </li>
+                        <li class="external">
+                            <a href="#">See all notifications <i class="m-icon-swapright"></i></a>
+                        </li>
+                    </ul>
+                </li>
+               <!-- END NOTIFICATION DROPDOWN -->
+                <!-- BEGIN INBOX DROPDOWN -->
+                <li class="dropdown" id="header_inbox_bar">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon-envelope"></i>
+                        <span class="badge">5</span>
+                    </a>
+                    <ul class="dropdown-menu extended inbox">
+                        <li>
+                            <p>You have 12 new messages</p>
+                        </li>
+                        <li class="external">
+                            <a href="inbox.html">See all messages <i class="m-icon-swapright"></i></a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- END INBOX DROPDOWN -->
+                <!-- BEGIN TODO DROPDOWN -->
+                <li class="dropdown" id="header_task_bar">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon-tasks"></i>
+                        <span class="badge">5</span>
+                    </a>
+                    <ul class="dropdown-menu extended tasks">
+                        <li>
+                            <p>You have 12 pending tasks</p>
+                        </li>
+                        <li class="external">
+                            <a href="#">See all tasks <i class="m-icon-swapright"></i></a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- END TODO DROPDOWN -->
+                <!-- BEGIN USER LOGIN DROPDOWN -->
+                <li class="dropdown user">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img alt="" src="/image/avatar1_small.jpg">
+                        <span class="username">Bob Nilson</span>
+                        <i class="icon-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a ng-click="" data-toggle="modal" data-target="#updateexample"><i class="icon-lock"></i>修改密码</a></li>
+                        <li><a href="../Index/logout"><i class="icon-key"></i>登出</a></li>
+                    </ul>
+                </li>
+                <!-- END USER LOGIN DROPDOWN -->
+            </ul>
+            <!-- END TOP NAVIGATION MENU -->
+        </div>
+    </div>
+    <!-- END TOP NAVIGATION BAR -->
+</div>
+
+<div class="page-container" id="main-container">
+    <div class="page-sidebar nav-collapse collapse">
+        <!-- BEGIN SIDEBAR MENU -->
+        <ul class="page-sidebar-menu">
+            <li>
+                <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                <div class="sidebar-toggler hidden-phone"></div>
+                <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+            </li>
+            <li class="start active ">
+                <a href="index.html">
+                    <i class="icon-home"></i>
+                    <span class="title">主页</span>
+                    <span class="selected"></span>
+                </a>
+            </li>
+            <li class="" ng-repeat="n in navs">
+                <a href="javascript:;">
+                    <i class="icon-bookmark-empty"></i>
+                    <span class="title">{{n.name}}</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu"  >
+                    <li ng-repeat="n1 in n.subnav"i>
+                        <a href="{{n1.url}}">
+                            {{n1.name}}</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <!-- END SIDEBAR MENU -->
+    </div>
+
+    <div class="page-content">
+        <div id="portlet-config" class="modal hide">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"></button>
+                <h3>Widget Settings</h3>
+            </div>
+            <div class="modal-body">
+                Widget settings form goes here
+            </div>
+        </div>
+        <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                    <h3 class="page-title">
+                        M4S <small>后台管理系统</small>
+                    </h3>
+ 
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+                </div>
+            </div>
+            <div ng-view="">
+
+            </div>
+        </div>
+    </div>
+    <!--<footer>
+        <hr />
+        <p><strong>Copyright &copy; 2014 车音网</strong></p>
+
+    </footer>-->
+
+</div>
+</body>
+
+<script src="/js/jquery-2.0.3.min.js" type="text/javascript"></script>
+<script src="/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+<script src="/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
+<script src="/js/bootstrap.min.js" type="text/javascript"></script>
+<!--[if lt IE 9]>
+<script src="/js/excanvas.min.js"></script>
+<script src="/js/respond.min.js"></script>
+<![endif]-->
+<script src="/js/jquery.slimscroll.min.js" type="text/javascript"></script>
+
+<script src="/js/jquery.uniform.min.js" type="text/javascript" ></script>
+<!-- END CORE PLUGINS -->
+<link href="/js/jasny-bootstrap.min.js" rel="stylesheet" />
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="/js/index.js" type="text/javascript"></script>
+
+
+<script src="/js/form-fileupload.js"></script>
+
+<!-- END PAGE LEVEL SCRIPTS -->
+<script>
+    jQuery(document).ready(function() {
+        App.init(); // initlayout and core plugins
+       // Index.init();
+
+    });
+</script>
+<![endif]-->
+<!-- END JAVASCRIPTS -->
+<script type="text/javascript">  var _gaq = _gaq || [];  _gaq.push(['_setAccount', 'UA-37564768-1']);  _gaq.push(['_setDomainName', 'keenthemes.com']);  _gaq.push(['_setAllowLinker', true]);  _gaq.push(['_trackPageview']);  (function() {    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);  })();</script></body>
+<!-- END BODY -->
+</html>
+
+
+<div id="updateexample" class="modal hide fade" tabindex="-1">
+    <div class="row-fluid">
+        <div class="span12 responsive" data-tablet="span12 fix-offset" data-desktop="span12">
+            <div class="portlet box blue">
+                <div class="portlet-title ">
+                    <div class="caption"><i class="icon-user"></i>修改密码</div>
+                    <div class="actions">
+                        <a href="#" class="close red" data-dismiss="modal" aria-hidden="true"></a>
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <form class="form-horizontal roledialog" action="#">
+                        <div class="row-fluid">
+                            <div class="span6 ">
+                                <div class="control-group">
+                                    <label class="control-label">密码</label>
+                                    <div class="controls">
+                                        <input type="password"  ng-required="true" ng-model="user.password" class="m-wrap span6" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span6 ">
+                                <div class="control-group">
+                                    <label class="control-label">确认密码</label>
+                                    <div class="controls">
+                                        <input type="password" ng-required="true"  ng-model="user.confirmpassword" class="m-wrap span6" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer no-margin-top" style="text-align: right">
+                <button type="button" nm-model="user" ng-disabled='searchForm.$invalid' data-dismiss="modal" ng-click="UpdatePassword(user)" class="btn btn-sm purple">
+                    <i class="icon-arrow-right"></i>
+                    保存
+                </button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button class="btn btn-sm red" data-dismiss="modal">
+                    <i class="icon-remove"></i>
+                    关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

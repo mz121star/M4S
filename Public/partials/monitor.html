@@ -1,0 +1,219 @@
+<ul class="nav nav-tabs">
+    <!--<li ng-repeat="st in sourcetype"><a href="#{{st.type}}" data-toggle="tab">{{st.type}}</a></li>-->
+    <li class="active"><a href="#weibo" data-toggle="tab">Micro Blog</a></li>
+    <li><a href="#shop" data-toggle="tab" class="text-white">eCommerce</a></li>
+    <li><a href="#forum" data-toggle="tab"class="text-white">Forum</a></li>
+    <li><a href="#se" data-toggle="tab"class="text-white">News Media</a></li>
+    <li><a href="#customer" data-toggle="tab"class="text-white">Customer</a></li>
+</ul>
+<div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade active in" id="weibo">
+        <pr-box>
+            <table id="weiboTable" class="table">
+                <thead>
+                <tr>
+                    <th class="w5-p">N0.</th>
+                    <th sortable class="w12-p">Name</th>
+                    <th class="w39-p">Url</th>
+                    <th class="w12-p">Status</th>
+                    <th>Action</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="m in monitorWeibo">
+                    <td>{{ $index+1 }}</td>
+                    <td>{{m.Name}}</td>
+                    <td>{{m.Url }}</td>
+                    <td>{{m.status | statusChange }}</td>
+                    <td><input type="button" ng-click="changeStatus(m)" class="btn btn-primary"
+                               value="{{ m.status |numToEnableTxt}}"></td>
+
+                </tr>
+
+                </tbody>
+            </table>
+        </pr-box>
+    </div>
+    <div class="tab-pane fade" id="shop">
+        <pr-box>
+                <table id="shopTable" class="table">
+                    <thead>
+                    <tr>
+                        <th class="w5-p">N0.</th>
+                        <th sortable class="w12-p">Name</th>
+                        <th class="w39-p">Url</th>
+                        <th class="w12-p">Status</th>
+                        <th>Action</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="m in monitorShops">
+                        <td>{{ $index+1 }}</td>
+                        <td>{{m.Name}}</td>
+                        <td>{{m.Url }}</td>
+                        <td>{{m.status | statusChange }}</td>
+                        <td><input type="button" ng-click="changeStatus(m)" class="btn btn-primary"
+                                   value="{{ m.status |numToEnableTxt}}"></td>
+
+                    </tr>
+
+                    </tbody>
+                </table>
+        </pr-box>
+    </div>
+    <div class="tab-pane fade" id="forum">
+        <pr-box>
+                <table id="forumTable" class="table">
+                    <thead>
+                    <tr>
+                        <th class="w5-p">N0.</th>
+                        <th sortable class="w12-p">Name</th>
+                        <th class="w39-p">Url</th>
+                        <th class="w12-p">Status</th>
+                        <th>Action</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="m in monitorForums">
+                        <td>{{ $index+1 }}</td>
+                        <td>{{m.Name}}</td>
+                        <td>{{m.Url }}</td>
+                        <td>{{m.status | statusChange }}</td>
+
+                        <td><input type="button" ng-click="changeStatus(m)" class="btn btn-primary"
+                                   value="{{ m.status |numToEnableTxt}}"></td>
+
+                    </tr>
+
+                    </tbody>
+                </table>
+        </pr-box>
+        </div>
+
+
+    <div class="tab-pane fade" id="se">
+        <pr-box>
+                <table id="SETable" class="table">
+                    <thead>
+                    <tr>
+                        <th class="w5-p">N0.</th>
+                        <th sortable class="w12-p">Name</th>
+                        <th class="w39-p">Url</th>
+                        <th class="w12-p">Status</th>
+                        <th>Action</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="m in monitorSearchs">
+                        <td>{{ $index+1 }}</td>
+                        <td>{{m.Name}}</td>
+                        <td>{{m.Url }}</td>
+                        <td>{{m.status | statusChange }}</td>
+                        <td><input type="button" ng-click="changeStatus(m)" class="btn btn-primary"
+                                   value="{{ m.status |numToEnableTxt}}"></td>
+
+                    </tr>
+
+                    </tbody>
+
+                    </tbody>
+                </table>
+        </pr-box>
+    </div>
+    <div class="tab-pane fade" id="customer">
+        <pr-box>
+                <table id="CustomerTable" class="table">
+                    <thead>
+                    <tr>
+                        <th class="w5-p">N0.</th>
+                        <th sortable class="w12-p">Name</th>
+                        <th class="w39-p">Url</th>
+                        <th class="w12-p">Status</th>
+                        <th>Action</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="m in monitorCustomer">
+                        <td>{{ $index+1 }}</td>
+                        <td>{{m.Name}}</td>
+                        <td>{{m.Url }}</td>
+                        <td>{{m.status | statusChange }}</td>
+                        <td><input type="button" ng-click="changeStatus(m)" class="btn btn-primary"
+                                   value="{{ m.status |numToEnableTxt}}"></td>
+
+                    </tr>
+
+                    </tbody>
+
+                    </tbody>
+                </table>
+        </pr-box>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="saveTopicModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Add New WebSite</h4>
+            </div>
+            <div class="modal-body">
+
+                <!--  Topic Name: <input type="text" ng-model="topicName" required="不能为空">
+ -->
+                <div class="editpanel">
+                    <div class="content">
+                        <div class="left"><span class="title">Name</span></div>
+                        <div class="center">
+                            <input type="text" ng-model="website.name">
+                        </div>
+                        <div class="right"></div>
+                    </div>
+
+                    <div class="content">
+                        <div class="left"><span class="title">URL </span></div>
+                        <div class="center">
+                            <input type="text" ng-model="website.url">
+
+                        </div>
+                        <div class="right"></div>
+                        <div class="content">
+                            <div class="left"><span class="title">Comment </span></div>
+                            <div class="center">
+
+                                <!--  <span class="item" ng-repeat="dt in SiteType.dataType">
+                                               <label><input type="radio" name="dataType" ng-value="dt.value" ng-model="SiteType.type">{{dt.value}}</label>
+                                         </span>-->
+                                <textarea ng-model="website.comment"></textarea>
+                            </div>
+                            <div class="right"></div>
+
+                        </div>
+                        <div ng-show="!!saveWarning" class="alert alert-success"> {{ saveWarning }}</div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" ng-disabled="!!!website.name||!!!website.url" class="btn btn-primary"
+                                ng-click="saveMonitor()">Save
+
+                        </button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+
+        </div>
+    </div>
+</div>

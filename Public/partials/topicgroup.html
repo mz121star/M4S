@@ -1,0 +1,250 @@
+<div class="panel">
+
+
+    <div class="box box-color box-bordered">
+        <div class="box-title">
+            <h3>
+                <i class="fa fa-table"></i>
+            </h3>
+        </div>
+        <div class="box-content nopadding">
+            <form class="form-horizontal form-bordered " role="form" novalidate name="searchFeedForm">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Keyword:</label>
+
+                    <div class="col-sm-10 form-con">
+                        <input type="text" class="form-control col-md-3" ng-model="keyword"><span
+                            class="glyphicon glyphicon-info-sign info"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Source Type:</label>
+
+                    <div class="col-sm-10 form-con">
+                        <label class="checkbox-inline" ng-repeat="st in sourcetype">
+                            <input class="checkbox" pr-check type="checkbox" name="sourceType" ng-checked="st.checked"
+                                   ng-model="st.checked" value="{{st.type}}"/>{{st.type}}
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group form-inline">
+                    <label class="col-sm-2 control-label">Date Range:</label>
+
+                    <div class="col-sm-10 form-con">
+                        <select class="form-control col-md-3">
+                            <option>Last 7 Days</option>
+                            <option>Last month</option>
+                        </select>
+                        <span class="pull-left form-text-middle">TimeFrame:&nbsp;&nbsp;&nbsp;&nbsp;from</span>
+                        <input bs-datepicker class="form-control col-md-3" type="text" ng-model="feeds.startTime"
+                               name="startTime" required="">
+                        <span class="pull-left form-text-middle">to</span>
+                        <input bs-datepicker class="form-control col-md-3" type="text" ng-model="feeds.endTime">
+
+                        <div ng-show="searchFeedForm.$invalid" class="alert alert-warning"> {{ warning }}</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"></label>
+
+                    <div class="col-sm-10 form-con">
+                        <button title="Topic Not null" class="btn btn-primary" data-toggle="modal" ng-click=""
+                                data-target="#saveTopicModal"
+                                ng-disabled='searchFeedForm.$invalid||!!!keyword'>Add Topic
+                        </button>
+                        <button class="btn btn-primary" data-toggle="modal" ng-click="" data-target="#addGroupModal">Add
+                            Group
+                        </button>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!--<form novalidate  name="searchFeedForm" >-->
+    <!--<div class="conditionspanel">-->
+
+    <!--<div class="content">-->
+    <!--<div class="cell size1">Keyword:</div>-->
+    <!--<div class="cell size5">-->
+    <!--<input type="text" ng-model="keyword" ><span class="glyphicon glyphicon-info-sign"></span>-->
+    <!--</div>-->
+
+    <!--</div>-->
+    <!--<div class="content">-->
+    <!--<div class="cell size1">Source Type:</div>-->
+    <!--<div class="cell size5">-->
+
+    <!--<span class="item" ng-repeat="st in sourcetype">-->
+    <!--<label><input  class="checkbox" uniform  type="checkbox" name="sourceType" ng-checked="st.checked"  ng-model="st.checked" value="{{st.type}}"/>{{st.type}}  </label>-->
+    <!--</span>-->
+
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="content" ng-hide="true">-->
+    <!--<div class="cell size1">Date Range:</div>-->
+    <!--<div class="cell size5">-->
+
+    <!--<select>-->
+    <!--<option>Last 7 Days</option>-->
+    <!--<option>Last month</option>-->
+    <!--</select>-->
+
+
+    <!--TimeFrame: <span>-->
+    <!--from-->
+    <!--&lt;!&ndash; <input data-date-format="dd/mm/yyyy" bs-datepicker type="text"  ng-model="feeds.startTime" name="startTime"   required="">&ndash;&gt;
+    -->
+
+    <!--<input   bs-datepicker type="text"  ng-model="feeds.startTime" name="startTime"   required="">-->
+
+    <!--to-->
+    <!--<input    bs-datepicker type="text" ng-model="feeds.endTime" > </span>-->
+    <!--<div ng-show="searchFeedForm.$invalid" class="alert alert-warning"> {{ warning }}</div>-->
+
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="content">-->
+    <!--<div class="cell size1"></div>-->
+    <!--<div class="cell size5">-->
+
+
+    <!--<button title="Topic Not null" class="btn btn-primary" data-toggle="modal" ng-click="" data-target="#saveTopicModal"-->
+    <!--ng-disabled='searchFeedForm.$invalid||!!!keyword'>Add Topic-->
+    <!--</button>-->
+    <!--<button   class="btn btn-primary" data-toggle="modal" ng-click="" data-target="#addGroupModal" >Add Group </button>-->
+
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--</div>-->
+    <!--</form>-->
+</div>
+
+<div class="panel">
+
+    <pr-box>
+        <table id="css_table" class="table">
+            <thead>
+            <tr>
+                <th class="w15-p"><i class="fa fa-plus-square"></i></th>
+                <th class="w15-p">Group Name</th>
+                <th class="w39-p">Description</th>
+                <th class="last">Action</th>
+            </tr>
+            </thead>
+            <tbody ng-repeat="group in groups" showdetail>
+            <tr>
+                <td class=" openlist" data-id="{{group._id}}" data-queryover="0" showtopictable><i
+                        class="fa fa-plus-square"></i></td>
+                <td class=" w150">{{group.Name }}</td>
+                <td class=" w100">{{group.Description }}</td>
+                <td class="last">
+                    <button class="btn btn-primary"   ng-click="delGroup(group)" >Delete
+                    </button>
+                </td>
+            </tr>
+            <tr class="subrow">
+                <td colspan="7" class="subrowtd">
+                    <!-- <table class="subtable">
+                         <tr class="thead">
+                             <td class="w30">N0.</td>
+                             <td sortable>Title</td>
+                             <td>Description</td>
+                             <td>Source</td>
+                             <td>Url</td>
+                         </tr>
+                         <tr class="tbody" ng-repeat="feed in feedContent" showdetail data-toggle="modal" ng-click="showDetail(feed)" data-target="#myModal">
+                             <td>{{ $index+1 }}</td>
+                             <td>{{feed.Title| maxlen:20  }} </td>
+                             <td>{{feed.Content | maxlen:40  }} </td>
+                             <td>{{ feed.FromSite | maxlen:40}}</td>
+                             <td><a ng-href="feed.FromUrl">{{feed.FromUrl}}</a></td>
+                         </tr>
+                     </table>-->
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </pr-box>
+</div>
+
+</div>
+
+<div class="modal fade" id="addGroupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Add Group</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-3 col-xs-3 form-alert-contro-label ">GroupName:</label>
+
+                        <div class="col-sm-9 col-xs-9">
+                            <input type="text" class="form-control col-sm-9" ng-model="topicGroupName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <label class="col-sm-3 col-xs-3 form-alert-contro-label ">Description:</label>
+
+                        <div class="col-sm-9 col-xs-9">
+                            <textarea class="form-control col-sm-9" ng-model="topicGroupDescription"></textarea>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" ng-disabled="!!!topicGroupName" class="btn btn-primary"
+                        ng-click="saveTopicGroup()">Save
+                    Group
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="modal fade" id="saveTopicModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Are your sure save the topic?</h4>
+            </div>
+            <div class="modal-body">
+
+                <!--  Topic Name: <input type="text" ng-model="topicName" required="不能为空">
+ -->            Topic Name: <input type="text" ng-model="topicName">
+                Group: <select ng-model="topicGroupName">
+                <option ng-repeat="group in groups" value="{{group._id}}">{{group.Name}}</option>
+            </select>
+                {{topicGroupName}}
+                <div ng-show="!!saveTopicWarning" class="alert alert-success"> {{ saveTopicWarning }}</div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" ng-disabled="!!!topicName" class="btn btn-primary" ng-click="saveTopic()">Save
+                    Topic
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+
+</div>
