@@ -21,7 +21,8 @@ require.config({
         "datatable":"../lib/datatable/jquery.dataTables.min",
         "ztree":"../lib/zTree/jquery.ztree.all-3.5.min",
         "jqueryfileload":"../lib/jquery/jquery.fileupload",
-        "tinymce":"../lib/tinymce/tinymce.min"
+        "tinymce":"../lib/tinymce/tinymce.min",
+        "angular-file-upload":"../lib/angular-file-upload"
         //"jquery-ui":""
     },
     shim: {

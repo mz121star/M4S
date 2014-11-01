@@ -282,6 +282,47 @@ define(['app', 'handlebars', 'icheck' ], function (app, handlebars, icheck) {
             }
         };
     }]);
+
+
+    app.directive('fileUploader', function() {
+        return {
+            restrict: 'E',
+            transclude: true,
+            template: '<div><input type="file" multiple /><button ng-click="upload()">Upload</button></div>'
+                +'<ul><li ng-repeat="file in files"> - </li></ul>',
+            controller: function($scope, $fileUpload) {
+                $scope.notReady = true;
+                $scope.upload = function() {
+                    $fileUpload.upload($scope.files);
+                };
+            },
+            link: function($scope, $element) {
+                var fileInput = $element.find('input[type="file"]');
+                fileInput.bind('change', function(e) {
+                    $scope.notReady = e.target.files.length == 0;
+                    $scope.files = [];
+                    for(i in e.target.files) {
+                        //Only push if the type is object for some stupid-ass reason browsers like to include functions and other junk
+                        if(typeof e.target.files[i] == 'object') $scope.files.push(e.target.files[i]);
+                    }
+                });
+            }
+        }
+    });
+    app.service('$fileUpload', ['$http', function($http) {
+        this.upload = function(files) {
+            //Not really sure why we have to use FormData().  Oh yeah, browsers suck.
+            var formData = new FormData();
+            for(i in files) {
+                formData.append('file_'+i, files[i]);
+            }
+            console.log(formData);
+            $http({method: 'POST', url: '/api/files', data: formData, headers: {'Content-Type': undefined}, transformRequest: angular.identity})
+                .success(function(data, status, headers, config) {
+
+                });
+        }
+    }]);
     app.directive('showtopictable', ['$http', '$compile', function ($http, $compile) {
 
         return {

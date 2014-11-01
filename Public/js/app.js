@@ -1,6 +1,6 @@
 
-define(['angular','angular-strap','pr-angular','fileupload'], function (angular ) {
-    var appmodule=angular.module('app', ['$strap.directives','$prAngular.directives']);
+define(['angular','angular-strap','pr-angular','fileupload','angular-file-upload'], function (angular ) {
+    var appmodule=angular.module('app', ['$strap.directives','$prAngular.directives','angularFileUpload']);
 
     appmodule.directive('tree', function () {
         return{
